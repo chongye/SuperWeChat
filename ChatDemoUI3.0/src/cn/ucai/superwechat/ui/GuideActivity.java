@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import cn.ucai.superwechat.R;
 
-public class GuideActivity extends AppCompatActivity {
+public class GuideActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
