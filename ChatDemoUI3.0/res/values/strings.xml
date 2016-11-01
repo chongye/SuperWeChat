@@ -2,105 +2,106 @@
 <resources>
 
     <!-- Main-->
-    <string name="app_name">╬в╨┼</string>
+    <string name="app_name">╬вя┐╜я┐╜</string>
     <string name="contacts">═и╤╢┬╝</string>
-    <string name="me">╬╥</string>
-    <string name="discover">╖в╧╓</string>
-    <string name="recommended_friends">╨┬╡─┼є╙╤</string>
-    <string name="group_chats">╚║┴─</string>
-    <string name="official_accounts">╣л╓┌║┼</string>
-    <string name="no_msg">╘▌╩▒├╗╙╨╨┬╧√╧в</string>
+    <string name="me">я┐╜я┐╜</string>
+    <string name="discover">я┐╜я┐╜я┐╜я┐╜</string>
+    <string name="recommended_friends">я┐╜┬╡я┐╜я┐╜я┐╜я┐╜я┐╜</string>
+    <string name="group_chats">╚║я┐╜я┐╜</string>
+    <string name="official_accounts">я┐╜я┐╜я┐╜┌║я┐╜</string>
+    <string name="no_msg">я┐╜я┐╜╩▒├╗я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜╧в</string>
 
     <string name="action_settings">Settings</string>
-    <string name="menu_groupchat">╖в╞Ё╚║┴─</string>
-    <string name="menu_addfriend">╠э╝╙┼є╙╤</string>
+    <string name="menu_groupchat">я┐╜я┐╜я┐╜я┐╜╚║я┐╜я┐╜</string>
+    <string name="menu_addfriend">я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜</string>
     <string name="menu_qrcode">╔и╥╗╔и</string>
-    <string name="menu_money">╬в╨┼╟о░№</string>
+    <string name="menu_money">╬вя┐╜я┐╜╟оя┐╜я┐╜</string>
 
     <!-- Login-->
-    <string name="countries_and_areas">╣·╝╥║═╡╪╟°</string>
-    <string name="login_txt_china">╓╨╣·</string>
-    <string name="login_txt_yourphone">─у╡─╩╓╗·║┼┬ы</string>
-    <string name="login_txt_username">─у╡─╙├╗з├√</string>
-    <string name="login_txt_nickname">─у╡─ъ╟│╞</string>
-    <string name="login_hint_code">╩ф╚ы╤щ╓д┬ы</string>
-    <string name="login_txt_code">╤щ╓д┬ы</string>
-    <string name="login_btn_sendcode">╖в╦═╤щ╓д┬ы</string>
+    <string name="countries_and_areas">я┐╜я┐╜я┐╜╥║═╡я┐╜я┐╜я┐╜</string>
+    <string name="login_txt_china">я┐╜╨╣я┐╜</string>
+    <string name="login_txt_yourphone">я┐╜я┐╜я┐╜я┐╜╓╗я┐╜я┐╜я┐╜я┐╜я┐╜</string>
+    <string name="login_txt_username">я┐╜я┐╜я┐╜я┐╜├╗я┐╜я┐╜я┐╜</string>
+    <string name="login_txt_nickname">я┐╜я┐╜я┐╜я┐╜╟│я┐╜</string>
+    <string name="login_hint_code">я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜╓дя┐╜я┐╜</string>
+    <string name="login_txt_code">я┐╜я┐╜╓дя┐╜я┐╜</string>
+    <string name="login_btn_sendcode">я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜╓дя┐╜я┐╜</string>
     <string name="login_txt_86">+86</string>
-    <string name="login_txt_inputpwd">╠ю╨┤├▄┬ы</string>
-    <string name="login_btn_action">╡╟┬╝</string>
-    <string name="login_btn_register">╫в▓с</string>
-    <string name="login_txt_qustion">╡╟┬╝╙Ў╡╜╬╩╠тг┐</string>
-    <string name="login_tip_tel_error">╟ы╩ф╚ы╒¤╚╖╡─╩╓╗·║┼гб</string>
-    <string name="login_tip_loginerror">╡╟┬╝╩з░▄</string>
+    <string name="login_txt_inputpwd">я┐╜я┐╜╨┤я┐╜я┐╜я┐╜я┐╜</string>
+    <string name="login_btn_action">я┐╜я┐╜┬╝</string>
+    <string name="login_btn_register">╫вя┐╜я┐╜</string>
+    <string name="login_txt_qustion">я┐╜я┐╜┬╝я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜тг┐</string>
+    <string name="login_tip_tel_error">я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜╚╖я┐╜я┐╜я┐╜╓╗я┐╜я┐╜┼гя┐╜</string>
+    <string name="login_tip_loginerror">я┐╜я┐╜┬╝╩зя┐╜я┐╜</string>
 
     <!-- profile-->
-    <string name="profile_txt_album">╧р▓с</string>
-    <string name="profile_txt_collect">╩╒▓╪</string>
-    <string name="profile_txt_money">╟о░№</string>
-    <string name="profile_txt_card">┐и░№</string>
-    <string name="profile_txt_smail">▒э╟щ</string>
-    <string name="profile_txt_setting">╔ш╓├</string>
+    <string name="profile_txt_album">я┐╜я┐╜я┐╜</string>
+    <string name="profile_txt_collect">я┐╜╒▓я┐╜</string>
+    <string name="profile_txt_money">╟оя┐╜я┐╜</string>
+    <string name="profile_txt_card">я┐╜я┐╜я┐╜я┐╜</string>
+    <string name="profile_txt_smail">я┐╜я┐╜я┐╜я┐╜</string>
+    <string name="profile_txt_setting">я┐╜я┐╜я┐╜я┐╜</string>
     <string name="profile_txt_username">Allen Juns</string>
-    <string name="profile_txt_userid">╬в╨┼║┼г║dada2012625</string>
-    <string name="profile_txt_mycode">╬╥╡─╢■╬м┬ы</string>
+    <string name="profile_txt_userid">╬вя┐╜┼║┼гя┐╜dada2012625</string>
+    <string name="profile_txt_mycode">я┐╜╥╡─╢я┐╜╬мя┐╜я┐╜</string>
 
     <!--UserInfo-->
-    <string name="userinfo_txt_title">╕Ў╚╦╨┼╧в</string>
-    <string name="userinfo_txt_profile">╧ъ╧╕╫╩┴╧</string>
-    <string name="userinfo_txt_avatar">═╖╧ё</string>
-    <string name="userinfo_txt_nick">ъ╟│╞</string>
-    <string name="userinfo_txt_name">╬в╨┼║┼</string>
-    <string name="userinfo_txt_qrcode">╢■╬м┬ы├√╞м</string>
-    <string name="userinfo_txt_address">╬╥╡─╡╪╓╖</string>
-    <string name="userinfo_txt_sex">╨╘▒Ё</string>
-    <string name="userinfo_txt_area">╡╪╟°</string>
-    <string name="userinfo_txt_sign">╕Ў╨╘╟й├√</string>
-    <string name="userinfo_txt_noinput">╬┤╠ю╨┤</string>
-    <string name="userinfo_txt_nosettings">╬┤╔ш╓├</string>
-    <string name="userinfo_txt_note_mark">╔ш╓├▒╕╫в║═▒ъ╟й</string>
-    <string name="userinfo_btn_add_contact">╠э╝╙╡╜═и╤╢┬╝</string>
-    <string name="userinfo_btn_send_msg">╖в╧√╧в</string>
-    <string name="userinfo_btn_send_video">╩╙╞╡┴─╠ь</string>
-    <string name="userinfo_txt_wechat_no">╬в╨┼║┼:</string>
+    <string name="userinfo_txt_title">я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜╧в</string>
+    <string name="userinfo_txt_profile">я┐╜я┐╜╧╕я┐╜я┐╜я┐╜я┐╜</string>
+    <string name="userinfo_txt_avatar">═╖я┐╜я┐╜</string>
+    <string name="userinfo_txt_nick">я┐╜╟│я┐╜</string>
+    <string name="userinfo_txt_name">╬вя┐╜┼║я┐╜</string>
+    <string name="userinfo_txt_qrcode">я┐╜я┐╜╬мя┐╜я┐╜я┐╜я┐╜╞м</string>
+    <string name="userinfo_txt_address">я┐╜╥╡─╡я┐╜╓╖</string>
+    <string name="userinfo_txt_sex">я┐╜╘▒я┐╜</string>
+    <string name="userinfo_txt_area">я┐╜я┐╜я┐╜я┐╜</string>
+    <string name="userinfo_txt_sign">я┐╜я┐╜я┐╜я┐╜╟йя┐╜я┐╜</string>
+    <string name="userinfo_txt_noinput">╬┤я┐╜я┐╜╨┤</string>
+    <string name="userinfo_txt_nosettings">╬┤я┐╜я┐╜я┐╜я┐╜</string>
+    <string name="userinfo_txt_note_mark">я┐╜я┐╜я┐╜├▒я┐╜╫вя┐╜═▒я┐╜╟й</string>
+    <string name="userinfo_btn_add_contact">я┐╜я┐╜╙╡я┐╜═и╤╢┬╝</string>
+    <string name="userinfo_btn_send_msg">я┐╜я┐╜я┐╜я┐╜╧в</string>
+    <string name="userinfo_btn_send_video">я┐╜я┐╜╞╡я┐╜я┐╜я┐╜я┐╜</string>
+    <string name="userinfo_txt_wechat_no">╬вя┐╜┼║я┐╜:</string>
 
     <!--contact-->
-    <string name="addcontact_title">╠э╝╙┴к╧╡╚╦</string>
-    <string name="addcontact_search">╒¤╘┌▓щ╒╥┴к╧╡╚╦...</string>
-    <string name="addcontact_adding">╒¤╘┌╠э╝╙...</string>
-    <string name="addcontact_send_msg">╖в╦═</string>
-    <string name="addcontact_send_msg_title">─у╨ш╥к╖в╦═╤щ╓д╔ъ╟ы,╡╚╢╘╖╜═и╣¤</string>
-    <string name="addcontact_send_msg_prefix">╬╥╩╟</string>
-    <string name="addcontact_be_friented">╥╤╠э╝╙</string>
+    <string name="addcontact_title">я┐╜я┐╜я┐╜я┐╜я┐╜╧╡я┐╜я┐╜</string>
+    <string name="addcontact_search">я┐╜я┐╜я┐╜┌▓я┐╜я┐╜я┐╜я┐╜я┐╜╧╡я┐╜я┐╜...</string>
+    <string name="addcontact_adding">я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜...</string>
+    <string name="addcontact_send_msg">я┐╜я┐╜я┐╜я┐╜</string>
+    <string name="addcontact_send_msg_title">я┐╜я┐╜я┐╜я┐╜╥кя┐╜я┐╜я┐╜я┐╜я┐╜я┐╜╓дя┐╜я┐╜я┐╜я┐╜,я┐╜╚╢╘╖я┐╜═ия┐╜я┐╜</string>
+    <string name="addcontact_send_msg_prefix">я┐╜я┐╜я┐╜я┐╜</string>
+    <string name="addcontact_be_friented">я┐╜я┐╜я┐╜я┐╜я┐╜</string>
 
 
     <!-- Dicover-->
-    <string name="discover_txt_pengyouquan">┼є╙╤╚ж</string>
+    <string name="discover_txt_pengyouquan">я┐╜я┐╜я┐╜я┐╜╚ж</string>
     <string name="discover_txt_saoyisao">╔и╥╗╔и</string>
     <string name="discover_txt_yaoyiyao">╥б╥╗╥б</string>
-    <string name="discover_txt_nearby">╕╜╜№╡─╚╦</string>
-    <string name="discover_txt_piaoliuping">╞п┴ў╞┐</string>
-    <string name="discover_txt_shop">╣║╬я</string>
-    <string name="discover_txt_game">╙╬╧╖</string>
+    <string name="discover_txt_nearby">я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜</string>
+    <string name="discover_txt_piaoliuping">╞пя┐╜я┐╜╞┐</string>
+    <string name="discover_txt_shop">я┐╜я┐╜я┐╜я┐╜</string>
+    <string name="discover_txt_game">я┐╜я┐╜╧╖</string>
 
     <!-- default -->
-    <string name="def_empty_data_text">┐╒┐╒╚ч╥▓гм╔ё┬э╢╝├╗╙╨</string>
-    <string name="def_empty_button_retry">╓╪╩╘</string>
-    <string name="def_net_error_text">═°┬ч▓╗╕°┴ж</string>
-    <string name="def_data_loading">╝╙╘╪╓╨&#8230;</string>
-    <string name="def_more">╔╧└н╝╙╘╪╕№╢р&#8230;</string>
-    <string name="key_back_msg">╘┘┤╬░┤╖╡╗╪╝№═╦│Ў</string>
+    <string name="def_empty_data_text">я┐╜╒┐я┐╜я┐╜я┐╜╥▓я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜├╗я┐╜я┐╜</string>
+    <string name="def_empty_button_retry">я┐╜я┐╜я┐╜я┐╜</string>
+    <string name="def_net_error_text">я┐╜я┐╜я┐╜ч▓╗я┐╜я┐╜я┐╜я┐╜</string>
+    <string name="def_data_loading">я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜&#8230;</string>
+    <string name="def_more">я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜╪╕я┐╜я┐╜я┐╜&#8230;</string>
+    <string name="key_back_msg">я┐╜┘┤╬░я┐╜я┐╜я┐╜я┐╜╪╝я┐╜я┐╜╦│я┐╜</string>
 
-    <!-- ╟о░№ -->
-    <string name="wallet_txt_lingqian">┴у╟о</string>
-    <string name="wallet_txt_yinhangka">╥°╨╨┐и</string>
-    <string name="wallet_txt_cards">3╒┼</string>
+    <!-- ╟оя┐╜я┐╜ -->
+    <string name="wallet_txt_lingqian">я┐╜я┐╜╟о</string>
+    <string name="wallet_txt_yinhangka">я┐╜я┐╜я┐╜╨┐я┐╜</string>
+    <string name="wallet_txt_cards">3я┐╜я┐╜</string>
 
-    <!-- ╔ш╓├ -->
-    <string name="setting_txt_usersafe">╒╦║┼░▓╚л</string>
-    <string name="setting_txt_msgtip">╨┬╧√╧в═и╓к</string>
-    <string name="setting_txt_yinsi">╥■╦╜</string>
-    <string name="setting_txt_tongyong">═и╙├</string>
-    <string name="setting_txt_about">╣╪╙┌╬в╨┼</string>
-    <string name="setting_btn_exit">═╦│Ў╡╟┬╝</string>
+    <!-- я┐╜я┐╜я┐╜я┐╜ -->
+    <string name="setting_txt_usersafe">я┐╜╦║┼░я┐╜╚л</string>
+    <string name="setting_txt_msgtip">я┐╜я┐╜я┐╜я┐╜╧в═и╓к</string>
+    <string name="setting_txt_yinsi">я┐╜я┐╜╦╜</string>
+    <string name="setting_txt_tongyong">═ия┐╜я┐╜</string>
+    <string name="setting_txt_about">я┐╜я┐╜я┐╜я┐╜╬вя┐╜я┐╜</string>
+    <string name="setting_btn_exit">я┐╜╦│я┐╜я┐╜я┐╜┬╝</string>
+    <string name="User_nick_cannot_be_empty">user nick cannot be empty</string>
 </resources>

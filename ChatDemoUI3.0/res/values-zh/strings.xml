@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="User_nick_cannot_be_empty">用户昵称不能为空</string>
+</resources>

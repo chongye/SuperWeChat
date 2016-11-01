@@ -30,7 +30,7 @@
             android:textColor="#000"
             android:gravity="center"/>
         <EditText
-            android:id="@+id/username"
+            android:id="@+id/et_username"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
@@ -59,7 +59,7 @@
             android:textColor="#000"
             android:gravity="center"/>
         <EditText
-            android:id="@+id/nick"
+            android:id="@+id/et_nick"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
@@ -88,7 +88,7 @@
             android:textColor="#000"
             android:gravity="center"/>
         <EditText
-            android:id="@+id/password"
+            android:id="@+id/et_password"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
@@ -117,7 +117,7 @@
             android:textColor="#000"
             android:gravity="center"/>
         <EditText
-            android:id="@+id/confirm_password"
+            android:id="@+id/et_confirm_password"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
@@ -131,13 +131,12 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"/>
     <Button
-        android:id="@+id/bt_login"
+        android:id="@+id/bt_register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="注册"
         android:layout_below="@id/ll_confirm_password"
         android:layout_margin="20dp"
         android:textSize="20sp"
-        android:background="@color/green"
-        android:onClick="login"/>
+        android:background="@color/green" />
 </RelativeLayout>
