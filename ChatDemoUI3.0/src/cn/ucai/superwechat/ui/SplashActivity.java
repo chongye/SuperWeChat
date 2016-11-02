@@ -7,8 +7,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.easeui.domain.User;
+
 import cn.ucai.superwechat.SuperWeChatHelper;
 import cn.ucai.superwechat.R;
+import cn.ucai.superwechat.db.UserDao;
 
 /**
  * 开屏页
@@ -17,12 +20,12 @@ import cn.ucai.superwechat.R;
 public class SplashActivity extends BaseActivity {
 
 	private static final int sleepTime = 2000;
-
+	SplashActivity mContext;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		setContentView(R.layout.em_activity_splash);
 		super.onCreate(arg0);
-
+		mContext = this;
 		RelativeLayout rootLayout = (RelativeLayout) findViewById(R.id.splash_root);
 		TextView versionText = (TextView) findViewById(R.id.tv_version);
 
@@ -43,6 +46,11 @@ public class SplashActivity extends BaseActivity {
 					long start = System.currentTimeMillis();
 					EMClient.getInstance().groupManager().loadAllGroups();
 					EMClient.getInstance().chatManager().loadAllConversations();
+					UserDao dao = new UserDao(mContext);
+					//  从环信上得到数据
+					String s = EMClient.getInstance().getCurrentUser();
+					User user = dao.getUser(s);
+					SuperWeChatHelper.getInstance().setCurrentUser(user);
 					long costTime = System.currentTimeMillis() - start;
 					//wait
 					if (sleepTime - costTime > 0) {
