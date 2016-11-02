@@ -11,6 +11,7 @@ import cn.ucai.superwechat.domain.InviteMessage;
 import cn.ucai.superwechat.domain.InviteMessage.InviteMesageStatus;
 import cn.ucai.superwechat.domain.RobotUser;
 import com.hyphenate.easeui.domain.EaseUser;
+import com.hyphenate.easeui.domain.User;
 import com.hyphenate.easeui.utils.EaseCommonUtils;
 import com.hyphenate.util.HanziToPinyin;
 
@@ -373,4 +374,51 @@ public class SuperWeChatDBManager {
 		}
 		return users;
 	}
+
+    //  实现在本地数据库保存用户，得到用户，更新用户的方法
+
+    public synchronized boolean saveUserData(User user){
+        SQLiteDatabase database = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(UserDao.USER_NAME,user.getMUserName());
+        values.put(UserDao.USER_NICK,user.getMUserNick());
+        values.put(UserDao.USER_AVATAR_ID,user.getMAvatarId());
+        values.put(UserDao.USER_AVATAR_PATH,user.getMAvatarPath());
+        values.put(UserDao.USER_AVATAR_SUFFIX,user.getMAvatarSuffix());
+        values.put(UserDao.USER_AVATAR_TYPE,user.getMAvatarType());
+        values.put(UserDao.USER_AVATAR_LASTUPDATETIME,user.getMAvatarLastUpdateTime());
+        if(database.isOpen()){
+            return database.replace(UserDao.USER_TABLE,null,values)!=-1;
+        }
+        return false;
+    }
+    public User getUser(String userName){
+        String sql = "select*from "+UserDao.USER_TABLE+" where "+UserDao.USER_NAME+" = ?";
+        SQLiteDatabase database = dbHelper.getReadableDatabase();
+        Cursor cs = database.rawQuery(sql, new String[]{userName});
+        User user = null;
+        if(cs.moveToNext()){
+            user = new User();
+            user.setMUserName(cs.getString(cs.getColumnIndex(UserDao.USER_NAME)));
+            user.setMUserNick(cs.getString(cs.getColumnIndex(UserDao.USER_NICK)));
+            user.setMAvatarId(cs.getInt(cs.getColumnIndex(UserDao.USER_AVATAR_ID)));
+            user.setMAvatarPath(cs.getString(cs.getColumnIndex(UserDao.USER_AVATAR_PATH)));
+            user.setMAvatarType(cs.getInt(cs.getColumnIndex(UserDao.USER_AVATAR_TYPE)));
+            user.setMAvatarSuffix(cs.getString(cs.getColumnIndex(UserDao.USER_AVATAR_SUFFIX)));
+            user.setMAvatarLastUpdateTime(cs.getString(cs.getColumnIndex(UserDao.USER_AVATAR_LASTUPDATETIME)));
+            return user;
+        }
+        return user;
+    }
+    public synchronized boolean updateUser(User user){
+        int result = -1;
+        SQLiteDatabase database = dbHelper.getWritableDatabase();
+        String sql = UserDao.USER_NAME +"=?";
+        ContentValues values = new ContentValues();
+        values.put(UserDao.USER_NICK,user.getMUserNick());
+        if(database.isOpen()){
+            result = database.update(UserDao.USER_TABLE,values,sql,new String[]{user.getMUserName()});
+        }
+        return result>0;
+    }
 }

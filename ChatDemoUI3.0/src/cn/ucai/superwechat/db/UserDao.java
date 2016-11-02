@@ -20,6 +20,7 @@ import android.content.Context;
 
 import cn.ucai.superwechat.domain.RobotUser;
 import com.hyphenate.easeui.domain.EaseUser;
+import com.hyphenate.easeui.domain.User;
 
 public class UserDao {
 	public static final String TABLE_NAME = "uers";
@@ -35,6 +36,16 @@ public class UserDao {
 	public static final String ROBOT_COLUMN_NAME_ID = "username";
 	public static final String ROBOT_COLUMN_NAME_NICK = "nick";
 	public static final String ROBOT_COLUMN_NAME_AVATAR = "avatar";
+
+	// 添加本地SQLite的用户信息
+	public static final String USER_TABLE = "t_superweb_user";
+	public static final String USER_NAME = "m_user_name";
+	public static final String USER_NICK = "m_user_nick";
+	public static final String USER_AVATAR_ID = "m_avatar_id";
+	public static final String USER_AVATAR_PATH = "m_avatar_path";
+	public static final String USER_AVATAR_SUFFIX = "m_avatar_suffix";
+	public static final String USER_AVATAR_TYPE = "m_avatar_type";
+	public static final String USER_AVATAR_LASTUPDATETIME = "m_avatar_lastupdatetime";
 	
 	
 	public UserDao(Context context) {
@@ -98,4 +109,15 @@ public class UserDao {
     public void saveRobotUser(List<RobotUser> robotList){
     	SuperWeChatDBManager.getInstance().saveRobotList(robotList);
     }
+	// 添加本地SQLite的保存用户，得到用户，更新用户的方法
+
+	public boolean saveUserAvatar(User user){
+		return SuperWeChatDBManager.getInstance().saveUserData(user);
+	}
+	public User getUserAvatar(String username){
+		return SuperWeChatDBManager.getInstance().getUser(username);
+	}
+	public boolean updateUserAvatar(User user){
+		return SuperWeChatDBManager.getInstance().updateUser(user);
+	}
 }

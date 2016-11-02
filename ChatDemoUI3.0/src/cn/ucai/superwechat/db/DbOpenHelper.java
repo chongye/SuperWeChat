@@ -53,6 +53,18 @@ public class DbOpenHelper extends SQLiteOpenHelper{
             + UserDao.PREF_TABLE_NAME + " ("
             + UserDao.COLUMN_NAME_DISABLED_GROUPS + " TEXT, "
             + UserDao.COLUMN_NAME_DISABLED_IDS + " TEXT);";
+
+	//  创建本地数据库
+
+	private static final String CREATE_USER_TABLE = "create table "
+			+UserDao.USER_TABLE+" ("
+			+UserDao.USER_NAME+" text primary key, "
+			+UserDao.USER_NICK+" text, "
+			+UserDao.USER_AVATAR_ID+" integer, "
+			+UserDao.USER_AVATAR_PATH+" text, "
+			+UserDao.USER_AVATAR_SUFFIX+" text, "
+			+UserDao.USER_AVATAR_TYPE+" integer, "
+			+UserDao.USER_AVATAR_LASTUPDATETIME+")";
 	
 	private DbOpenHelper(Context context) {
 		super(context, getUserDatabaseName(), null, DATABASE_VERSION);
@@ -75,6 +87,7 @@ public class DbOpenHelper extends SQLiteOpenHelper{
 		db.execSQL(INIVTE_MESSAGE_TABLE_CREATE);
 		db.execSQL(CREATE_PREF_TABLE);
 		db.execSQL(ROBOT_TABLE_CREATE);
+		db.execSQL(CREATE_USER_TABLE);
 		
 	}
 
