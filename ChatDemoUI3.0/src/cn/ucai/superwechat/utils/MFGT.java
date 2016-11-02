@@ -38,12 +38,4 @@ public class MFGT {
         startActivity(context,intent);
         finish((Activity) context);
     }
-    // 注册成功后跳转到登录界面，并显示在登录界面上显示用户名
-    public static void startLoginActivity(Context context,String username){
-        Intent intent = new Intent(context,LoginActivity.class);
-        intent.putExtra(I.User.USER_NAME,username);
-        startActivity(context,intent);
-        finish((Activity) context);
-    }
-
 }
