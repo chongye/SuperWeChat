@@ -38,7 +38,7 @@ public class UserDao {
 	public static final String ROBOT_COLUMN_NAME_AVATAR = "avatar";
 
 	// 添加本地SQLite的用户信息
-	public static final String USER_TABLE = "t_superweb_user";
+	public static final String USER_TABLE = "t_superwechat_user";
 	public static final String USER_NAME = "m_user_name";
 	public static final String USER_NICK = "m_user_nick";
 	public static final String USER_AVATAR_ID = "m_avatar_id";
@@ -111,13 +111,13 @@ public class UserDao {
     }
 	// 添加本地SQLite的保存用户，得到用户，更新用户的方法
 
-	public boolean saveUserAvatar(User user){
+	public boolean saveUser(User user){
 		return SuperWeChatDBManager.getInstance().saveUserData(user);
 	}
-	public User getUserAvatar(String username){
+	public User getUser(String username){
 		return SuperWeChatDBManager.getInstance().getUser(username);
 	}
-	public boolean updateUserAvatar(User user){
+	public boolean updateUser(User user){
 		return SuperWeChatDBManager.getInstance().updateUser(user);
 	}
 }
