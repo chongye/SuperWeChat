@@ -77,8 +77,8 @@ public class UserProfileActivity extends BaseActivity implements OnClickListener
 		if(username != null){
     		if (username.equals(EMClient.getInstance().getCurrentUser())) {
     			tvUsername.setText(EMClient.getInstance().getCurrentUser());
-    			EaseUserUtils.setUserNick(username, tvNickName);
-                EaseUserUtils.setUserAvatar(this, username, headAvatar);
+    			EaseUserUtils.setAppUserNick(username, tvNickName);
+                EaseUserUtils.setAppUserAvatar(this, username, headAvatar);
     		} else {
     			tvUsername.setText(username);
     			EaseUserUtils.setUserNick(username, tvNickName);
