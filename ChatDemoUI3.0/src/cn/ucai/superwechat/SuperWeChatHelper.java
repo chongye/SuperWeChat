@@ -1236,7 +1236,11 @@ public class SuperWeChatHelper {
         isBlackListSyncedWithServer = false;
 
         isGroupAndContactListenerRegisted = false;
-        
+
+        //在退出登录时，应将数据清空，不然会保存退出之前的数据，再次登录时，不会重新访问新的数据库，而在之前的数据库得到新账户数据为空
+        // 所以将昵称设置为用户名
+        setAppContactList(null);
+
         setContactList(null);
         setRobotList(null);
         getUserProfileManager().reset();
@@ -1265,7 +1269,7 @@ public class SuperWeChatHelper {
 
     public void setAppContactList(Map<String, User> aContactList) {
         if(aContactList == null){
-            if (appContactList != null) {
+            if (appContactList != null || appContactList.size()==0) {
                 appContactList.clear();
             }
             return;

@@ -383,7 +383,6 @@ public class SettingsFragment extends Fragment implements OnClickListener {
 						// show login screen
 						((MainActivity) getActivity()).finish();
 						startActivity(new Intent(getActivity(), LoginActivity.class));
-						
 					}
 				});
 			}
