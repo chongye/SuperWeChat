@@ -64,7 +64,7 @@ public class DbOpenHelper extends SQLiteOpenHelper{
 			+UserDao.USER_AVATAR_PATH+" text, "
 			+UserDao.USER_AVATAR_SUFFIX+" text, "
 			+UserDao.USER_AVATAR_TYPE+" integer, "
-			+UserDao.USER_AVATAR_LASTUPDATETIME+")";
+			+UserDao.USER_AVATAR_LASTUPDATETIME+" text)";
 	
 	private DbOpenHelper(Context context) {
 		super(context, getUserDatabaseName(), null, DATABASE_VERSION);

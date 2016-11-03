@@ -1,9 +1,11 @@
 package com.hyphenate.easeui.utils;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.baidu.platform.comapi.map.L;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.hyphenate.easeui.R;
@@ -84,13 +86,15 @@ public class EaseUserUtils {
     }
     public static void setAppUserAvatar(Context context, String username, ImageView imageView){
         User user = getAppUserInfo(username);
-        if(user != null && user.getMAvatarId() != null){
+        Log.e("user","user"+user);
+        if(user != null && user.getAvatar() != null){
             try {
-                int avatarResId = user.getMAvatarId();
+                String avatarResId = user.getAvatar();
+                Log.e("DownLoadAvatar", user.getAvatar());
                 Glide.with(context).load(avatarResId).into(imageView);
             } catch (Exception e) {
                 //use default avatar
-                Glide.with(context).load(String.valueOf(user.getMAvatarId())).diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(R.drawable.ease_default_avatar).into(imageView);
+                Glide.with(context).load(user.getAvatar()).diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(R.drawable.ease_default_avatar).into(imageView);
             }
         }else{
             Glide.with(context).load(R.drawable.ease_default_avatar).into(imageView);
