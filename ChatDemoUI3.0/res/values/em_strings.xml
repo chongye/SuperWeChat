@@ -80,7 +80,7 @@
     <string name="address_book">Address book</string>
     <string name="setting">Settings</string>
     <string name="now_refresh_list">Loading data</string>
-    <string name="Application_and_notify">Invitation and notification</string>
+    <string name="Application_and_notify" translatable="false">Invitation and notification</string>
     <string name="save_new_nickname">Save new nickname</string>
     <string name="nickname_description">Once this nickname is set, it will be used in push notification (by default this is user ID ) when the receiver is using the iOS device.</string>
     <string name="group_chat">Group chat</string>
@@ -90,7 +90,7 @@
     <string name="black_item">Black list</string>
     <string name="diagnose">Debug</string>
     <string name="push_nick">nickname for Notification</string>
-    <string name="Current_version">SDK version</string>
+    <string name="Current_version" translatable="false">SDK version</string>
     <string name="Not_Set">Not set</string>
     <string name="Upload_the_log">Uploading the log</string>
     <string name="The_new_group_chat">Create new group</string>
@@ -138,7 +138,7 @@
     
     <string name="not_add_myself">"Can't add yourself"</string>
     <string name="This_user_is_already_your_friend">This user is already your friend</string>
-    <string name="Add_a_friend">Let me to be your friend!</string>
+    <string name="Add_a_friend" translatable="false">Let me to be your friend!</string>
     <string name="send_successful">Request was sent, waiting for the peer to accept</string>
     <string name="Request_add_buddy_failure">Request add buddy failure:</string>
     <string name="Network_error">Network error</string>
@@ -171,12 +171,12 @@
     <string name="Move_into_blacklist_failure">Move into blacklist failure</string>
     <string name="you_are_group">You have been kicked off from the group</string>
     <string name="the_current_group">The current group has been dismissed</string>
-    <string name="Cant_chat_with_yourself">cannot chat with yourself</string>
+    <string name="Cant_chat_with_yourself" translatable="false">cannot chat with yourself</string>
     <string name="deleting">Deleting..</string>
-    <string name="Delete_failed">Failed to delete</string>
+    <string name="Delete_failed" translatable="false">Failed to delete</string>
     <string name="Is_moved_into_blacklist">Moving to blacklist..</string>
-    <string name="Log_uploaded_successfully">Log was uploaded successfully</string>
-    <string name="Log_Upload_failed">Failed to upload the log</string>
+    <string name="Log_uploaded_successfully" translatable="false">Log was uploaded successfully</string>
+    <string name="Log_Upload_failed" translatable="false">Failed to upload the log</string>
     <string name="get_failed_please_check">Failed to retrieve, please check the network or try again later</string>
     <string name="people">people</string>
     <string name="being_added">added</string>
@@ -187,20 +187,20 @@
     <string name="is_modify_the_group_name">Modifying the group name..</string>
     <string name="Modify_the_group_name_successful">Modify the group name successful</string>
     <string name="change_the_group_name_failed_please">Failed to change the group name, please check the network or try again later</string>
-    <string name="Are_moving_to_blacklist">Moving to blacklist</string>
+    <string name="Are_moving_to_blacklist" translatable="false">Moving to blacklist</string>
     <string name="failed_to_move_into">Failed to move to the blacklist, please check the network or try again later</string>
     <string name="Exit_the_group_chat_failure">Failed to exit the group:</string>
     <string name="Dissolve_group_chat_tofail">Failed to dismiss the group:</string>
-    <string name="Add_group_members_fail">Add group members fail:</string>
+    <string name="Add_group_members_fail" translatable="false">Add group members fail:</string>
     <string name="Is_unblock">Unblocking group</string>
     <string name="remove_group_of">Remove group of shielding failure, please check the network or try again later</string>
     <string name="group_is_blocked">Blocking the group..</string>
     <string name="group_of_shielding">Group of shielding failure, please check the network or try again later</string>
     <string name="sure_to_empty_this">Clear all messages?</string>
     <string name="The_delete_button_is_clicked">The delete button is clicked</string>
-    <string name="Add_a_button_was_clicked">Add a button was clicked</string>
+    <string name="Add_a_button_was_clicked" translatable="false">Add a button was clicked</string>
     <string name="not_delete_myself">Cannot delete myself</string>
-    <string name="Are_removed">Removing</string>
+    <string name="Are_removed" translatable="false">Removing</string>
     <string name="confirm_the_members">Move this member to group blacklist?</string>
     <string name="Failed_to_get_group_chat_information">Failed to get group information:</string>
     <string name="Is_sending_a_request">Sending the request..</string>
@@ -222,7 +222,7 @@
     <string name="can_not_connect_chat_server_connection">Cannot connect to server</string>
     <string name="the_current_network">The current network is not available, please check the network Settings</string>
     <string name="Invite_you_to_join_a_group_chat"> Invite you to join this group</string>
-    <string name="Agreed_to_your_group_chat_application">Accepted your group application</string>
+    <string name="Agreed_to_your_group_chat_application" translatable="false">Accepted your group application</string>
     <string name="Logoff_notification">Logoff notification</string>
     <string name="Remove_the_notification">Remove the notification</string>
     <string name="Group_name_cannot_be_empty">Group name cannot be empty</string>
@@ -231,7 +231,7 @@
     <string name="The_video_to_start">The video to start</string>
     <string name="Whether_to_send">Are you sure to send?</string>
     <string name="Open_the_equipment_failure">Open the equipment failure!</string>
-    <string name="Confirm_password_cannot_be_empty">Confirm password cannot be empty!</string>
+    <string name="Confirm_password_cannot_be_empty" translatable="false">Confirm password cannot be empty!</string>
     <string name="Two_input_password">Inconsistent password, please enter again!</string>
     <string name="Is_the_registered">Registering..</string>
     <string name="Registered_successfully">Registered successfully</string>
@@ -239,17 +239,17 @@
     <string name="User_already_exists">User already existed!</string>
     <string name="registration_failed_without_permission">Registration failed, without permission!</string>
     <string name="Registration_failed">Registration failed</string>
-    <string name="Are_logged_out">Logging out</string>
+    <string name="Are_logged_out" translatable="false">Logging out</string>
     <string name="Download_the_pictures">Download the pictures: 0%</string>
     <string name="Download_the_pictures_new">Download the pictures:</string>
     <string name="Failed_to_download_file">Failed to download file:</string>
     <string name="Version_number_is_wrong">Version number is wrong</string>
-    <string name="Are_connected_to_each_other">Connecting to peer..</string>
+    <string name="Are_connected_to_each_other" translatable="false">Connecting to peer..</string>
     <string name="Is_not_yet_connected_to_the_server">Not connect to server</string>
     <string name="have_connected_with">Connected to the peer and waiting for the peer to accept</string>
     <string name="In_the_call">In the call..</string>
     <string name="The_other_party_refused_to_accept">The call was refused</string>
-    <string name="Connection_failure">Connection failed!</string>
+    <string name="Connection_failure" translatable="false">Connection failed!</string>
     <string name="The_other_party_is_not_online">The peer is not online now, please try later</string>
     <string name="The_other_is_on_the_phone_please">The peer is busy now, please try later</string>
     <string name="The_other_is_hang_up">The peer has ended the call</string>
@@ -259,23 +259,23 @@
     <string name="Did_not_download">Not yet downloaded</string>
     <string name="Has_agreed_to_your_friend_request">Accepted your request</string>
     <string name="Request_to_add_you_as_a_friend">You got a friend request</string>
-    <string name="Apply_to_the_group_of">Apply to join the group</string>
+    <string name="Apply_to_the_group_of" translatable="false">Apply to join the group</string>
     <string name="invite_join_group">Invite to join the group</string>
     <string name="Has_agreed_to">Accepted</string>
     <string name="Has_refused_to">Refused</string>
-    <string name="Are_agree_with">Accepting</string>
-    <string name="Are_refuse_with">Refusing</string>
+    <string name="Are_agree_with" translatable="false">Accepting</string>
+    <string name="Are_refuse_with" translatable="false">Refusing</string>
     <string name="direct_call">Direct</string>
     <string name="relay_call">Relay</string>
-    <string name="Agree_with_failure">Failed to accept</string>
+    <string name="Agree_with_failure" translatable="false">Failed to accept</string>
     <string name="Refuse_with_failure">Failed to refuse</string>
     <string name="Is_download_voice_click_later">Downloading the voice message, click later</string>
     <string name="Send_the_following_pictures">Send the following pictures?</string>
     <string name="search_new">Search</string>
     
-    <string name="Delete_the_contact">Delete the contact</string>
+    <string name="Delete_the_contact" translatable="false">Delete the contact</string>
     <string name="Move_into_the_blacklist_new">Move into the blacklist</string>
-    <string name="Change_the_group_name">Change group name</string>
+    <string name="Change_the_group_name" translatable="false">Change group name</string>
     <string name="Sync_Groups_From_Server">Sync groups with server</string>
     
     <string name="update_contact_list">Update contact list</string>
