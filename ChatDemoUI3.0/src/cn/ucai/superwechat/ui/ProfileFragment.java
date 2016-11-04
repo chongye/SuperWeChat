@@ -1,16 +1,3 @@
-/**
- * Copyright (C) 2016 Hyphenate Inc. All rights reserved.
- * <p>
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package cn.ucai.superwechat.ui;
 
 import android.content.Context;
@@ -22,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.easemob.redpacketui.utils.RedPacketUtil;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.easeui.utils.EaseUserUtils;
 
@@ -32,11 +20,13 @@ import cn.ucai.superwechat.Constant;
 import cn.ucai.superwechat.R;
 import cn.ucai.superwechat.utils.MFGT;
 
-public class SettingsFragment extends Fragment {
-    @BindView(R.id.txt_left)
-    TextView txtLeft;
-    @BindView(R.id.txt_right)
-    TextView txtRight;
+/**
+ * Created by Administrator on 2016/11/4.
+ */
+
+public class ProfileFragment extends Fragment {
+    Context mContext;
+    View view;
     @BindView(R.id.iv_avatar)
     ImageView ivAvatar;
     @BindView(R.id.tv_nick)
@@ -44,13 +34,16 @@ public class SettingsFragment extends Fragment {
     @BindView(R.id.tv_username)
     TextView tvUsername;
 
-    Context mContext;
+    public ProfileFragment() {
 
-    View view;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.em_fragment_conversation_settings, container, false);
+        view = inflater.inflate(R.layout.fragment_profile, container, false);
+        mContext = getActivity();
+        ButterKnife.bind(this, view);
+        return view;
     }
 
     @Override
@@ -62,32 +55,37 @@ public class SettingsFragment extends Fragment {
     }
 
     private void initView() {
-        txtLeft.setVisibility(View.VISIBLE);
-        txtRight.setVisibility(View.VISIBLE);
+        String username = EMClient.getInstance().getCurrentUser();
+        if (username != null) {
+            tvUsername.setText(username);
+            EaseUserUtils.setAppUserNick(username, tvNick);
+            EaseUserUtils.setAppUserAvatar(mContext, username, ivAvatar);
+        }
+
     }
 
-    @OnClick({R.id.rl_profile, R.id.rl_setting})
+    @OnClick({R.id.rl_profile, R.id.rl_setting, R.id.rl_money})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.rl_profile:
-                String username = EMClient.getInstance().getCurrentUser();
-                if(username!=null){
-                    tvUsername.setText(username);
-                    EaseUserUtils.setAppUserNick(username, tvNick);
-                    EaseUserUtils.setAppUserAvatar(mContext, username, ivAvatar);
-                }
                 break;
             case R.id.rl_setting:
                 MFGT.gotoSetting(mContext);
                 break;
+            //red packet code : 进入零钱页面
+            case R.id.rl_money:
+                RedPacketUtil.startChangeActivity(mContext);
+                break;
+            //end of red packet code
         }
     }
+
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        if(((MainActivity)getActivity()).isConflict){
+        if (((MainActivity) getActivity()).isConflict) {
             outState.putBoolean("isConflict", true);
-        }else if(((MainActivity)getActivity()).getCurrentAccountRemoved()){
+        } else if (((MainActivity) getActivity()).getCurrentAccountRemoved()) {
             outState.putBoolean(Constant.ACCOUNT_REMOVED, true);
         }
     }
