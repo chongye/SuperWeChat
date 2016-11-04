@@ -1292,7 +1292,8 @@ public class SuperWeChatHelper {
      * @return
      */
     public Map<String, User> getAppContactList() {
-        if (isLoggedIn() && appContactList == null) {
+        //  解决退出登陆后，重新登录未更新昵称，用户头像的bug  appContactList.size()==0
+        if (isLoggedIn() && (appContactList == null || appContactList.size()==0)) {
             appContactList = demoModel.getAppContactList();
         }
 

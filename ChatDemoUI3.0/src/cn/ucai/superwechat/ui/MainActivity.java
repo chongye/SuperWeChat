@@ -381,7 +381,7 @@ public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedCha
             conflictBuilder.create().dismiss();
             conflictBuilder = null;
         }
-        unregisterBroadcastReceiver();
+        /*unregisterBroadcastReceiver();*/
 
         try {
             unregisterReceiver(internalDebugReceiver);

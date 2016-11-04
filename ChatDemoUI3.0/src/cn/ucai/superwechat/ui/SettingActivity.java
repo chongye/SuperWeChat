@@ -1,5 +1,6 @@
 package cn.ucai.superwechat.ui;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -25,11 +27,14 @@ import butterknife.OnClick;
 import cn.ucai.superwechat.R;
 import cn.ucai.superwechat.SuperWeChatHelper;
 import cn.ucai.superwechat.SuperWeChatModel;
+import cn.ucai.superwechat.utils.ExitAppActivity;
 import cn.ucai.superwechat.utils.MFGT;
 
-public class SettingActivity extends AppCompatActivity implements View.OnClickListener {
+public class SettingActivity extends BaseActivity implements View.OnClickListener {
     @BindView(R.id.txt_title)
     TextView txtTitle;
+
+    private ImageView imBack;
     /**
      * new message notification
      */
@@ -105,6 +110,11 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     private void initView() {
         txtTitle.setVisibility(View.VISIBLE);
         txtTitle.setText("设置");
+        // 实例化back 并设置点击事件
+        imBack = (ImageView) findViewById(R.id.img_back);
+        imBack.setVisibility(View.VISIBLE);
+        imBack.setOnClickListener(this);
+
         rl_switch_notification = (RelativeLayout) findViewById(R.id.rl_switch_notification);
         rl_switch_sound = (RelativeLayout) findViewById(R.id.rl_switch_sound);
         rl_switch_vibrate = (RelativeLayout) findViewById(R.id.rl_switch_vibrate);
@@ -339,6 +349,9 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.rl_custom_server:
                 startActivity(new Intent(mContext, SetServersActivity.class));
                 break;
+            case R.id.img_back:
+                MFGT.finish(mContext);
+                break;
             default:
                 break;
         }
@@ -358,8 +371,9 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
                 mContext.runOnUiThread(new Runnable() {
                     public void run() {
                         pd.dismiss();
+                        ExitAppActivity.getInstance().exit();
                         // show login screen
-                        (mContext).finish();
+//                        (mContext).finish();
                         startActivity(new Intent(mContext, LoginActivity.class));
                     }
                 });
@@ -383,10 +397,5 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
                 });
             }
         });
-    }
-
-    @OnClick(R.id.img_back)
-    public void back() {
-        MFGT.finish(mContext);
     }
 }
