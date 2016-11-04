@@ -9,6 +9,7 @@ import cn.ucai.superwechat.ui.LoginActivity;
 import cn.ucai.superwechat.ui.MainActivity;
 import cn.ucai.superwechat.ui.RegisterActivity;
 import cn.ucai.superwechat.ui.SettingActivity;
+import cn.ucai.superwechat.ui.UserProfileActivity;
 
 public class MFGT {
     public static void finish(Activity activity){
@@ -42,6 +43,11 @@ public class MFGT {
     //  从个人中心跳转到用户设置界面
     public static void gotoSetting(Context context){
         Intent intent = new Intent(context, SettingActivity.class);
+        startActivity(context,intent);
+    }
+    // 从个人中心跳转到用户资料
+    public static void gotoUserProfile(Context context){
+        Intent intent = new Intent(context, UserProfileActivity.class);
         startActivity(context,intent);
     }
 }

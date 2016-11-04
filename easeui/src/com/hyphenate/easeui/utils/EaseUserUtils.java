@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.baidu.platform.comapi.map.L;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.hyphenate.chat.EMClient;
 import com.hyphenate.easeui.R;
 import com.hyphenate.easeui.controller.EaseUI;
 import com.hyphenate.easeui.controller.EaseUI.EaseUserProfileProvider;
@@ -17,7 +18,6 @@ import com.hyphenate.easeui.domain.User;
 public class EaseUserUtils {
     
     static EaseUserProfileProvider userProvider;
-    
     static {
         userProvider = EaseUI.getInstance().getUserProfileProvider();
     }
@@ -75,6 +75,17 @@ public class EaseUserUtils {
     }
 
     public static void setAppUserNick(String username,TextView textView){
+        if(textView != null){
+            User user = getAppUserInfo(username);
+            if(user != null && user.getMUserNick() != null){
+                textView.setText(user.getMUserNick());
+            }else{
+                textView.setText(username);
+            }
+        }
+    }
+    public static void setCurrentAppUserNick(TextView textView){
+        String username = EMClient.getInstance().getCurrentUser();
         if(textView != null){
             User user = getAppUserInfo(username);
             if(user != null && user.getMUserNick() != null){

@@ -64,10 +64,19 @@ public class ProfileFragment extends Fragment {
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        String username = EMClient.getInstance().getCurrentUser();
+        EaseUserUtils.setAppUserNick(username, tvNick);
+        EaseUserUtils.setAppUserAvatar(mContext, username, ivAvatar);
+    }
+
     @OnClick({R.id.rl_profile, R.id.rl_setting, R.id.rl_money})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.rl_profile:
+                MFGT.gotoUserProfile(mContext);
                 break;
             case R.id.rl_setting:
                 MFGT.gotoSetting(mContext);

@@ -2,6 +2,8 @@ package cn.ucai.superwechat.net;
 
 import android.content.Context;
 
+import java.io.File;
+
 import cn.ucai.superwechat.bean.Result;
 import cn.ucai.superwechat.utils.I;
 import cn.ucai.superwechat.utils.MD5;
@@ -36,6 +38,27 @@ public class NetDao {
         utils.setRequestUrl(I.REQUEST_LOGIN)
                 .addParam(I.User.USER_NAME,userName)
                 .addParam(I.User.PASSWORD,MD5.getMessageDigest(password))
+                .targetClass(String.class)
+                .execute(listener);
+    }
+    //  更新用户昵称
+    public static void updateNick(Context context,String userName,String nick,OkHttpUtils.OnCompleteListener<String> listener){
+        OkHttpUtils<String> utils = new OkHttpUtils<>(context);
+        utils.setRequestUrl(I.REQUEST_UPDATE_USER_NICK)
+                .addParam(I.User.USER_NAME,userName)
+                .addParam(I.User.NICK,nick)
+                .targetClass(String.class)
+                .execute(listener);
+    }
+    // 更新用户图像
+    // http://101.251.196.90:8000/SuperWeChatServerV2.0/updateAvatar?name_or_hxid=yechong&avatarType=user_avatar
+    public static void updateAvatar(Context context, String userName, File file, OkHttpUtils.OnCompleteListener<String> listener){
+        OkHttpUtils<String> utils = new OkHttpUtils<>(context);
+        utils.setRequestUrl(I.REQUEST_UPDATE_AVATAR)
+                .addParam(I.User.USER_NAME,userName)
+                .addParam(I.AVATAR_TYPE,I.AVATAR_TYPE_USER_PATH)
+                .addFile2(file)
+                .post()
                 .targetClass(String.class)
                 .execute(listener);
     }
