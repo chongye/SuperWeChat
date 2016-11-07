@@ -143,7 +143,6 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         textview2 = (TextView) findViewById(R.id.textview2);
 
         blacklistContainer = (LinearLayout) findViewById(R.id.ll_black_list);
-        userProfileContainer = (LinearLayout) findViewById(R.id.ll_user_profile);
         llDiagnose = (LinearLayout) findViewById(R.id.ll_diagnose);
         pushNick = (LinearLayout) findViewById(R.id.ll_set_push_nick);
 
@@ -151,7 +150,6 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         chatOptions = EMClient.getInstance().getOptions();
 
         blacklistContainer.setOnClickListener(mContext);
-        userProfileContainer.setOnClickListener(mContext);
         rl_switch_notification.setOnClickListener(mContext);
         rl_switch_sound.setOnClickListener(mContext);
         rl_switch_vibrate.setOnClickListener(mContext);
@@ -332,10 +330,6 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 break;
             case R.id.ll_set_push_nick:
                 startActivity(new Intent(mContext, OfflinePushNickActivity.class));
-                break;
-            case R.id.ll_user_profile:
-                startActivity(new Intent(mContext, UserProfileActivity.class).putExtra("setting", true)
-                        .putExtra("username", EMClient.getInstance().getCurrentUser()));
                 break;
             case R.id.switch_custom_server:
                 if (customServerSwitch.isSwitchOpen()) {

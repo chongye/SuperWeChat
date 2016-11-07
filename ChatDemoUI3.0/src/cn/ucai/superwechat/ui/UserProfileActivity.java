@@ -42,10 +42,13 @@ import cn.ucai.superwechat.bean.Result;
 import cn.ucai.superwechat.net.NetDao;
 import cn.ucai.superwechat.net.OkHttpUtils;
 import cn.ucai.superwechat.utils.CommonUtils;
+import cn.ucai.superwechat.utils.I;
+import cn.ucai.superwechat.utils.L;
 import cn.ucai.superwechat.utils.MFGT;
 import cn.ucai.superwechat.utils.ResultUtils;
 
 public class UserProfileActivity extends BaseActivity implements OnClickListener {
+    final static String TAG = UserProfileActivity.class.getSimpleName();
 
     private static final int REQUESTCODE_PICK = 1;
     private static final int REQUESTCODE_CUTTING = 2;
@@ -227,14 +230,17 @@ public class UserProfileActivity extends BaseActivity implements OnClickListener
         dialog = ProgressDialog.show(this, getString(R.string.dl_update_photo), getString(R.string.dl_waiting));
         dialog.show();
         File file = saveBitmapFile(data);
+        L.e(TAG,"file:"+file);
         NetDao.updateAvatar(this, username,file, new OkHttpUtils.OnCompleteListener<String>() {
             @Override
             public void onSuccess(String s) {
                 if(s!=null){
                     Result result = ResultUtils.getResultFromJson(s,User.class);
+                    L.e(TAG,"result:"+result);
                     if(result!=null&&result.isRetMsg()){
+                        User u = (User) result.getRetData();
+                        user = u;
                         setPicToView(data);
-                        dialog.dismiss();
                     }else{
                         CommonUtils.showShortToast(R.string.toast_updatephoto_fail);
                         dialog.dismiss();
@@ -278,14 +284,19 @@ public class UserProfileActivity extends BaseActivity implements OnClickListener
             Bitmap photo = extras.getParcelable("data");
             Drawable drawable = new BitmapDrawable(getResources(), photo);
             userHeadAvatar.setImageDrawable(drawable);
-            uploadUserAvatar(Bitmap2Bytes(photo));
+            dialog.dismiss();
+                Toast.makeText(UserProfileActivity.this, getString(R.string.toast_updatephoto_success),
+                        Toast.LENGTH_SHORT).show();
+                // 上传头像成功后将数据保存到数据库   要是保存时间
+                SuperWeChatHelper.getInstance().saveAppContact(user);
+            /*uploadUserAvatar(Bitmap2Bytes(photo));*/
         }
     }
     public File saveBitmapFile(Intent picdata){
         Bundle extras = picdata.getExtras();
         if(extras!=null){
             Bitmap bitmap = extras.getParcelable("data");
-            String imagePath = EaseImageUtils.getImagePath(user.getMUserName()+user.getMAvatarSuffix());
+            String imagePath = EaseImageUtils.getImagePath(user.getMUserName()+ user.getMAvatarSuffix());
             File file = new File(imagePath);//保存图片的路径
             try {
                 BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
@@ -313,6 +324,8 @@ public class UserProfileActivity extends BaseActivity implements OnClickListener
                         if (avatarUrl != null) {
                             Toast.makeText(UserProfileActivity.this, getString(R.string.toast_updatephoto_success),
                                     Toast.LENGTH_SHORT).show();
+                            // 上传头像成功后将数据保存到数据库   要是保存时间
+                            SuperWeChatHelper.getInstance().saveAppContact(user);
                         } else {
                             Toast.makeText(UserProfileActivity.this, getString(R.string.toast_updatephoto_fail),
                                     Toast.LENGTH_SHORT).show();
