@@ -3,6 +3,7 @@ package cn.ucai.superwechat.ui;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,21 +59,24 @@ public class ProfileFragment extends Fragment {
         String username = EMClient.getInstance().getCurrentUser();
         if (username != null) {
             tvUsername.setText(username);
-            EaseUserUtils.setAppUserNick(username, tvNick);
-            EaseUserUtils.setAppUserAvatar(mContext, username, ivAvatar);
+            showInfo();
         }
 
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
+    private void showInfo() {
         String username = EMClient.getInstance().getCurrentUser();
         EaseUserUtils.setAppUserNick(username, tvNick);
         EaseUserUtils.setAppUserAvatar(mContext, username, ivAvatar);
     }
 
-    @OnClick({R.id.rl_profile, R.id.rl_setting, R.id.rl_money})
+    @Override
+    public void onResume() {
+        super.onResume();
+        showInfo();
+    }
+
+    @OnClick({R.id.rl_profile, R.id.rl_setting, R.id.rl_money, R.id.iv_avatar})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.rl_profile:
@@ -86,6 +90,11 @@ public class ProfileFragment extends Fragment {
                 RedPacketUtil.startChangeActivity(mContext);
                 break;
             //end of red packet code
+            case R.id.iv_avatar:
+               /* AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                builder.setView(R.layout.bigphoto)
+                        .create()
+                        .show();*/
         }
     }
 

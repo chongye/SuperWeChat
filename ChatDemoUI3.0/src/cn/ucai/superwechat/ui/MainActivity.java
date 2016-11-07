@@ -54,18 +54,22 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import cn.ucai.superwechat.Constant;
 import cn.ucai.superwechat.R;
 import cn.ucai.superwechat.SuperWeChatHelper;
 import cn.ucai.superwechat.adapter.MainTabAdpter;
 import cn.ucai.superwechat.db.InviteMessgeDao;
+import cn.ucai.superwechat.dialog.ActionItem;
+import cn.ucai.superwechat.dialog.TitlePopup;
 import cn.ucai.superwechat.runtimepermissions.PermissionsManager;
 import cn.ucai.superwechat.runtimepermissions.PermissionsResultAction;
+import cn.ucai.superwechat.utils.MFGT;
 import cn.ucai.superwechat.widget.DMTabHost;
 import cn.ucai.superwechat.widget.MFViewPager;
 
 @SuppressLint("NewApi")
-public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedChangeListener,ViewPager.OnPageChangeListener{
+public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedChangeListener, ViewPager.OnPageChangeListener {
 
     protected static final String TAG = "MainActivity";
     // user logged into another device
@@ -84,6 +88,11 @@ public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedCha
     private boolean isCurrentAccountRemoved = false;
 
     MainTabAdpter mAdapter;
+
+    // 添加加号图标
+    TitlePopup titlePopup;
+
+    Context mContext;
 
 
     /**
@@ -189,7 +198,7 @@ public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedCha
      * init views
      */
     private void initView() {
-		/*unreadLabel = (TextView) findViewById(R.id.unread_msg_number);
+        /*unreadLabel = (TextView) findViewById(R.id.unread_msg_number);
 		unreadAddressLable = (TextView) findViewById(R.id.unread_address_number);
 		mTabs = new Button[3];
 		mTabs[0] = (Button) findViewById(R.id.btn_conversation);
@@ -197,6 +206,7 @@ public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedCha
 		mTabs[2] = (Button) findViewById(R.id.btn_setting);
 		// select first tab
 		mTabs[0].setSelected(true);*/
+        mContext = this;
         txtLeft.setVisibility(View.VISIBLE);
         imgRight.setVisibility(View.VISIBLE);
 
@@ -213,9 +223,47 @@ public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedCha
 
         layoutTabhost.setOnCheckedChangeListener(this);
         layoutViewPager.setOnPageChangeListener(this);
-    }
 
-    EMMessageListener messageListener = new EMMessageListener() {
+        titlePopup = new TitlePopup(this, ViewPager.LayoutParams.WRAP_CONTENT, ViewPager.LayoutParams.WRAP_CONTENT);
+        titlePopup.addAction(new ActionItem(this, R.string.menu_groupchat, R.drawable.icon_menu_group));
+        titlePopup.addAction(new ActionItem(this, R.string.menu_addfriend, R.drawable.icon_menu_addfriend));
+        titlePopup.addAction(new ActionItem(this, R.string.menu_qrcode, R.drawable.icon_menu_sao));
+        titlePopup.addAction(new ActionItem(this, R.string.menu_money, R.drawable.icon_menu_money));
+        titlePopup.setItemOnClickListener(onItemOnClickListener);
+    }
+    TitlePopup.OnItemOnClickListener onItemOnClickListener = new TitlePopup.OnItemOnClickListener() {
+        @Override
+        public void onItemClick(ActionItem item, int position) {
+            switch (position) {
+                case 0:
+                    break;
+                case 1:
+                    MFGT.gotoAddFriend(mContext);
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+            }
+        }
+    };
+        /*titlePopup.setItemOnClickListener(new TitlePopup.OnItemOnClickListener() {
+            @Override
+            public void onItemClick(ActionItem item, int position) {
+                switch (position){
+                    case 0:
+                        break;
+                    case 1:
+                        MFGT.gotoAddFriend(mContext);
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                }
+            }
+        });*/
+        EMMessageListener messageListener = new EMMessageListener() {
 
         @Override
         public void onMessageReceived(List<EMMessage> messages) {
@@ -276,7 +324,7 @@ public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedCha
     @Override
     public void onCheckedChange(int checkedPosition, boolean byUser) {
         //  viewPager设置状态，
-        layoutViewPager.setCurrentItem(checkedPosition,false);
+        layoutViewPager.setCurrentItem(checkedPosition, false);
         /*layoutTabhost.setChecked(checkedPosition);*/
     }
 
@@ -294,6 +342,12 @@ public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedCha
     @Override
     public void onPageScrollStateChanged(int state) {
 
+    }
+  //  添加加号的点击事件
+    @OnClick(R.id.img_right)
+    public void onClick() {
+        //  点击加号显示里面的内容，以layout_title布局文件为弹窗点并显示
+        titlePopup.show(findViewById(R.id.layout_title));
     }
 	
 	/*private void registerBroadcastReceiver() {
