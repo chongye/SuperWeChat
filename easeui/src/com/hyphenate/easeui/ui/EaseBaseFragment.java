@@ -20,6 +20,8 @@ public abstract class EaseBaseFragment extends Fragment{
         inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         //noinspection ConstantConditions
         titleBar = (EaseTitleBar) getView().findViewById(R.id.title_bar);
+        //  将标题隐藏
+        titleBar.setVisibility(View.GONE);
         
         initView();
         setUpView();

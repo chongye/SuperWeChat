@@ -4,8 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
+import com.hyphenate.easeui.domain.User;
+
 import cn.ucai.superwechat.R;
 import cn.ucai.superwechat.ui.AddContactActivity;
+import cn.ucai.superwechat.ui.FriendProfileActivity;
 import cn.ucai.superwechat.ui.LoginActivity;
 import cn.ucai.superwechat.ui.MainActivity;
 import cn.ucai.superwechat.ui.RegisterActivity;
@@ -54,6 +57,12 @@ public class MFGT {
     // 跳转到添加朋友界面
     public static void gotoAddFriend(Context context){
         Intent intent = new Intent(context, AddContactActivity.class);
+        startActivity(context,intent);
+    }
+    //在查找成功，跳到好友信息界面
+    public static void gotoFriendProfile(Context context,User user){
+        Intent intent = new Intent(context, FriendProfileActivity.class);
+        intent.putExtra(I.User.USER_NAME,user);
         startActivity(context,intent);
     }
 }

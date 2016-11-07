@@ -62,4 +62,13 @@ public class NetDao {
                 .post()
                 .execute(listener);
     }
+    // 通过用户名查找用户
+//    http://101.251.196.90:8000/SuperWeChatServerV2.0/findUserByUserName?m_user_name=yechong
+    public static void findUserByUserName(Context context,String userName,OkHttpUtils.OnCompleteListener<String>listener){
+        OkHttpUtils<String> utils = new OkHttpUtils<>(context);
+        utils.setRequestUrl(I.REQUEST_FIND_USER)
+                .addParam(I.User.USER_NAME,userName)
+                .targetClass(String.class)
+                .execute(listener);
+    }
 }
