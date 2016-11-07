@@ -109,4 +109,5 @@
     <string name="toast_nick_not_same">update nick not same</string>
     <string name="contact_unable_empty">contact unable empty</string>
     <string name="add_contact_fail">add contact fail</string>
+    <string name="contact_detial_profile">contact detial profile</string>
 </resources>

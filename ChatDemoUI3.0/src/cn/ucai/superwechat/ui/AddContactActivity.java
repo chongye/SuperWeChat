@@ -179,7 +179,7 @@ public class AddContactActivity extends BaseActivity {
         progressDialog.setTitle(R.string.addcontact_search);
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
-        NetDao.findUserByUserName(mContext, userName, new OkHttpUtils.OnCompleteListener<String>() {
+        NetDao.findUserByUserName(mContext, contactName, new OkHttpUtils.OnCompleteListener<String>() {
             @Override
             public void onSuccess(String s) {
                 if(s!=null){

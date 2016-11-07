@@ -155,6 +155,7 @@
         android:layout_marginRight="30dp"
         android:textSize="15dp"
         android:textColor="#fff"
+        android:visibility="gone"
         android:background="#4BA948"/>
     <Button
         android:id="@+id/bt_sendMsg"
@@ -166,6 +167,7 @@
         android:layout_marginRight="30dp"
         android:textSize="15dp"
         android:textColor="#fff"
+        android:visibility="gone"
         android:background="#4BA948"
         />
     <Button
@@ -177,5 +179,6 @@
         android:layout_marginTop="20dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
+        android:visibility="gone"
         android:background="#fff"/>
 </LinearLayout>

@@ -12,6 +12,7 @@ import cn.ucai.superwechat.ui.FriendProfileActivity;
 import cn.ucai.superwechat.ui.LoginActivity;
 import cn.ucai.superwechat.ui.MainActivity;
 import cn.ucai.superwechat.ui.RegisterActivity;
+import cn.ucai.superwechat.ui.RequestAddActivity;
 import cn.ucai.superwechat.ui.SettingActivity;
 import cn.ucai.superwechat.ui.UserProfileActivity;
 
@@ -62,6 +63,12 @@ public class MFGT {
     //在查找成功，跳到好友信息界面
     public static void gotoFriendProfile(Context context,User user){
         Intent intent = new Intent(context, FriendProfileActivity.class);
+        intent.putExtra(I.User.USER_NAME,user);
+        startActivity(context,intent);
+    }
+    //跳转到请求添加好友界面
+    public static void gotoRequestAdd(Context context,User user){
+        Intent intent = new Intent(context, RequestAddActivity.class);
         intent.putExtra(I.User.USER_NAME,user);
         startActivity(context,intent);
     }

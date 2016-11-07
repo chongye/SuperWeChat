@@ -111,5 +111,19 @@ public class EaseUserUtils {
             Glide.with(context).load(R.drawable.ease_default_avatar).into(imageView);
         }
     }
+    public static void setAppContactAvatar(Context context,User user,ImageView imageView){
+        if(user != null && user.getAvatar() != null){
+            try {
+                String avatarResId = user.getAvatar();
+                Log.e("DownLoadAvatar", user.getAvatar());
+                Glide.with(context).load(avatarResId).into(imageView);
+            } catch (Exception e) {
+                //use default avatar
+                Glide.with(context).load(user.getAvatar()).diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(R.drawable.ease_default_avatar).into(imageView);
+            }
+        }else{
+            Glide.with(context).load(R.drawable.ease_default_avatar).into(imageView);
+        }
+    }
     
 }
