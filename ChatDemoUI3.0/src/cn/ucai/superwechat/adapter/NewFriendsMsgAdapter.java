@@ -16,15 +16,23 @@ package cn.ucai.superwechat.adapter;
 import java.util.List;
 
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.easeui.domain.User;
+import com.hyphenate.easeui.utils.EaseUserUtils;
+
 import cn.ucai.superwechat.R;
+import cn.ucai.superwechat.bean.Result;
 import cn.ucai.superwechat.db.InviteMessgeDao;
 import cn.ucai.superwechat.domain.InviteMessage;
 import cn.ucai.superwechat.domain.InviteMessage.InviteMesageStatus;
+import cn.ucai.superwechat.net.NetDao;
+import cn.ucai.superwechat.net.OkHttpUtils;
+import cn.ucai.superwechat.utils.ResultUtils;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -44,6 +52,7 @@ public class NewFriendsMsgAdapter extends ArrayAdapter<InviteMessage> {
 	public NewFriendsMsgAdapter(Context context, int textViewResourceId, List<InviteMessage> objects) {
 		super(context, textViewResourceId, objects);
 		this.context = context;
+		// 得到消息请求的集合
 		messgeDao = new InviteMessgeDao(context);
 	}
 
@@ -52,12 +61,13 @@ public class NewFriendsMsgAdapter extends ArrayAdapter<InviteMessage> {
 		final ViewHolder holder;
 		if (convertView == null) {
 			holder = new ViewHolder();
+			// 把em_row_invite_msg布局加进去
 			convertView = View.inflate(context, R.layout.em_row_invite_msg, null);
 			holder.avator = (ImageView) convertView.findViewById(R.id.avatar);
 			holder.reason = (TextView) convertView.findViewById(R.id.message);
 			holder.name = (TextView) convertView.findViewById(R.id.name);
             holder.agree = (Button) convertView.findViewById(R.id.agree);
-			holder.status = (Button) convertView.findViewById(R.id.user_state);
+			/*holder.status = (Button) convertView.findViewById(R.id.user_state);*/
 			holder.groupContainer = (LinearLayout) convertView.findViewById(R.id.ll_group);
 			holder.groupname = (TextView) convertView.findViewById(R.id.tv_groupName);
 			// holder.time = (TextView) convertView.findViewById(R.id.time);
@@ -93,22 +103,38 @@ public class NewFriendsMsgAdapter extends ArrayAdapter<InviteMessage> {
 			
 			holder.reason.setText(msg.getReason());
 			holder.name.setText(msg.getFrom());
+			NetDao.findUserByUserName(context, msg.getFrom(), new OkHttpUtils.OnCompleteListener<String>() {
+				@Override
+				public void onSuccess(String s) {
+					if(s != null){
+						Result result = ResultUtils.getResultFromJson(s, User.class);
+						if(result!=null&&result.isRetMsg()){
+							User u = (User) result.getRetData();
+							EaseUserUtils.setAppContactAvatar(context,u,holder.avator);
+						}
+					}
+				}
+
+				@Override
+				public void onError(String error) {
+
+				}
+			});
 			// holder.time.setText(DateUtils.getTimestampString(new
 			// Date(msg.getTime())));
 			if (msg.getStatus() == InviteMesageStatus.BEAGREED) {
-				holder.status.setVisibility(View.INVISIBLE);
+				/*holder.status.setVisibility(View.INVISIBLE);*/
 				holder.reason.setText(str1);
 			} else if (msg.getStatus() == InviteMesageStatus.BEINVITEED || msg.getStatus() == InviteMesageStatus.BEAPPLYED ||
 			        msg.getStatus() == InviteMesageStatus.GROUPINVITATION) {
 			    holder.agree.setVisibility(View.VISIBLE);
                 holder.agree.setEnabled(true);
-                holder.agree.setBackgroundResource(android.R.drawable.btn_default);
                 holder.agree.setText(str2);
 			    
-				holder.status.setVisibility(View.VISIBLE);
+				/*holder.status.setVisibility(View.VISIBLE);
 				holder.status.setEnabled(true);
 				holder.status.setBackgroundResource(android.R.drawable.btn_default);
-				holder.status.setText(str7);
+				holder.status.setText(str7);*/
 				if(msg.getStatus() == InviteMesageStatus.BEINVITEED){
 					if (msg.getReason() == null) {
 						// use default text
@@ -129,47 +155,44 @@ public class NewFriendsMsgAdapter extends ArrayAdapter<InviteMessage> {
                     @Override
                     public void onClick(View v) {
                         // accept invitation
-                        acceptInvitation(holder.agree, holder.status, msg);
+                        acceptInvitation(holder.agree, /*holder.status, */msg);
                     }
                 });
-				holder.status.setOnClickListener(new OnClickListener() {
+				/*holder.status.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
 						// decline invitation
 					    refuseInvitation(holder.agree, holder.status, msg);
 					}
-				});
-			} else if (msg.getStatus() == InviteMesageStatus.AGREED) {
+				});*/
+			} /*else if (msg.getStatus() == InviteMesageStatus.AGREED) {
 				holder.status.setText(str5);
 				holder.status.setBackgroundDrawable(null);
 				holder.status.setEnabled(false);
-			} else if(msg.getStatus() == InviteMesageStatus.REFUSED){
+			} *//*else if(msg.getStatus() == InviteMesageStatus.REFUSED){
 				holder.status.setText(str6);
 				holder.status.setBackgroundDrawable(null);
-				holder.status.setEnabled(false);
-			} else if(msg.getStatus() == InviteMesageStatus.GROUPINVITATION_ACCEPTED){
+				holder.status.setEnabled(false);*/
+			}/* else if(msg.getStatus() == InviteMesageStatus.GROUPINVITATION_ACCEPTED){
 			    String str = msg.getGroupInviter() + str9 + msg.getGroupName();
                 holder.status.setText(str);
                 holder.status.setBackgroundDrawable(null);
                 holder.status.setEnabled(false);
-            } else if(msg.getStatus() == InviteMesageStatus.GROUPINVITATION_DECLINED){
+            } *//*else if(msg.getStatus() == InviteMesageStatus.GROUPINVITATION_DECLINED){
                 String str = msg.getGroupInviter() + str10 + msg.getGroupName();
                 holder.status.setText(str);
                 holder.status.setBackgroundDrawable(null);
                 holder.status.setEnabled(false);
-            }
-		}
+            }*/
 
 		return convertView;
 	}
 
 	/**
 	 * accept invitation
-	 * 
-	 * @param button
-	 * @param username
+	 *
 	 */
-	private void acceptInvitation(final Button buttonAgree, final Button buttonRefuse, final InviteMessage msg) {
+	private void acceptInvitation(final Button buttonAgree, /*final Button buttonRefuse, */final InviteMessage msg) {
 		final ProgressDialog pd = new ProgressDialog(context);
 		String str1 = context.getResources().getString(R.string.Are_agree_with);
 		final String str2 = context.getResources().getString(R.string.Has_agreed_to);
@@ -183,6 +206,7 @@ public class NewFriendsMsgAdapter extends ArrayAdapter<InviteMessage> {
 				// call api
 				try {
 					if (msg.getStatus() == InviteMesageStatus.BEINVITEED) {//accept be friends
+						//  当点击同意时，会执行此方法 和 SuperWeChatHelper中的onContactAdded方法，需将数据保存在内存和数据库
 						EMClient.getInstance().contactManager().acceptInvitation(msg.getFrom());
 					} else if (msg.getStatus() == InviteMesageStatus.BEAPPLYED) { //accept application to join group
 						EMClient.getInstance().groupManager().acceptApplication(msg.getFrom(), msg.getGroupId());
@@ -200,10 +224,10 @@ public class NewFriendsMsgAdapter extends ArrayAdapter<InviteMessage> {
 						public void run() {
 							pd.dismiss();
 							buttonAgree.setText(str2);
-							buttonAgree.setBackgroundDrawable(null);
+							buttonAgree.setVisibility(View.GONE);
 							buttonAgree.setEnabled(false);
 							
-							buttonRefuse.setVisibility(View.INVISIBLE);
+							/*buttonRefuse.setVisibility(View.INVISIBLE);*/
 						}
 					});
 				} catch (final Exception e) {
@@ -223,9 +247,7 @@ public class NewFriendsMsgAdapter extends ArrayAdapter<InviteMessage> {
 	
 	/**
      * decline invitation
-     * 
-     * @param button
-     * @param username
+     *
      */
     private void refuseInvitation(final Button buttonAgree, final Button buttonRefuse, final InviteMessage msg) {
         final ProgressDialog pd = new ProgressDialog(context);
@@ -284,7 +306,7 @@ public class NewFriendsMsgAdapter extends ArrayAdapter<InviteMessage> {
 		TextView name;
 		TextView reason;
         Button agree;
-		Button status;
+		/*Button status;*/
 		LinearLayout groupContainer;
 		TextView groupname;
 		// TextView time;
