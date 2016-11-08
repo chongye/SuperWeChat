@@ -88,6 +88,7 @@ public class FriendProfileActivity extends AppCompatActivity {
                 MFGT.gotoRequestAdd(mComtext,user);
                 break;
             case R.id.bt_sendMsg:
+                MFGT.gotoChat(mComtext,user.getMUserName());
                 break;
             case R.id.bt_videoChat:
                 break;

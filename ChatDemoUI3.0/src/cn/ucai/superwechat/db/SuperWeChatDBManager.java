@@ -10,6 +10,8 @@ import cn.ucai.superwechat.SuperWeChatApplication;
 import cn.ucai.superwechat.domain.InviteMessage;
 import cn.ucai.superwechat.domain.InviteMessage.InviteMesageStatus;
 import cn.ucai.superwechat.domain.RobotUser;
+import cn.ucai.superwechat.utils.L;
+
 import com.hyphenate.easeui.domain.EaseUser;
 import com.hyphenate.easeui.domain.User;
 import com.hyphenate.easeui.utils.EaseCommonUtils;
@@ -223,7 +225,7 @@ public class SuperWeChatDBManager {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         List<InviteMessage> msgs = new ArrayList<InviteMessage>();
         if(db.isOpen()){
-            Cursor cursor = db.rawQuery("select * from " + InviteMessgeDao.TABLE_NAME + " desc",null);
+            Cursor cursor = db.rawQuery("select * from " + InviteMessgeDao.TABLE_NAME +" order by "+InviteMessgeDao.COLUMN_NAME_TIME+ " desc",null);
             while(cursor.moveToNext()){
                 InviteMessage msg = new InviteMessage();
                 int id = cursor.getInt(cursor.getColumnIndex(InviteMessgeDao.COLUMN_NAME_ID));
@@ -282,11 +284,13 @@ public class SuperWeChatDBManager {
     
     synchronized int getUnreadNotifyCount(){
         int count = 0;
+        L.e("MSG_COUNT","MSG_COUNT"+count);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         if(db.isOpen()){
             Cursor cursor = db.rawQuery("select " + InviteMessgeDao.COLUMN_NAME_UNREAD_MSG_COUNT + " from " + InviteMessgeDao.TABLE_NAME, null);
             if(cursor.moveToFirst()){
                 count = cursor.getInt(0);
+                L.e("MSG_COUNT","MSG_COUNT"+count);
             }
             cursor.close();
         }

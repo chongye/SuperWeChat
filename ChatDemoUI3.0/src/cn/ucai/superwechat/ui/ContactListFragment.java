@@ -22,6 +22,7 @@ import cn.ucai.superwechat.SuperWeChatHelper.DataSyncListener;
 import cn.ucai.superwechat.R;
 import cn.ucai.superwechat.db.InviteMessgeDao;
 import cn.ucai.superwechat.db.UserDao;
+import cn.ucai.superwechat.utils.MFGT;
 import cn.ucai.superwechat.widget.ContactItemView;
 import com.hyphenate.easeui.domain.EaseUser;
 import com.hyphenate.easeui.ui.EaseContactListFragment;
@@ -30,6 +31,7 @@ import com.hyphenate.util.NetUtils;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -56,10 +58,13 @@ public class ContactListFragment extends EaseContactListFragment {
     private ContactItemView applicationItem;
     private InviteMessgeDao inviteMessgeDao;
 
+    Context mContext;
+
     @SuppressLint("InflateParams")
     @Override
     protected void initView() {
         super.initView();
+        mContext = getActivity();
         @SuppressLint("InflateParams") View headerView = LayoutInflater.from(getActivity()).inflate(R.layout.em_contacts_header, null);
         HeaderItemClickListener clickListener = new HeaderItemClickListener();
         applicationItem = (ContactItemView) headerView.findViewById(R.id.application_item);
@@ -97,6 +102,7 @@ public class ContactListFragment extends EaseContactListFragment {
     
     @SuppressWarnings("unchecked")
     @Override
+    // 设置联系人的界面
     protected void setUpView() {
         titleBar.setRightImageResource(R.drawable.em_add);
         titleBar.setRightLayoutClickListener(new OnClickListener() {
@@ -122,7 +128,8 @@ public class ContactListFragment extends EaseContactListFragment {
                 if (user != null) {
                     String username = user.getUsername();
                     // demo中直接进入聊天页面，实际一般是进入用户详情页
-                    startActivity(new Intent(getActivity(), ChatActivity.class).putExtra("userId", username));
+                    MFGT.gotoFriendProfile(getContext(),SuperWeChatHelper.getInstance().getAppContactList().get(username));
+                    /*startActivity(new Intent(getActivity(), ChatActivity.class).putExtra("userId", username));*/
                 }
             }
         });
@@ -178,8 +185,8 @@ public class ContactListFragment extends EaseContactListFragment {
         public void onClick(View v) {
             switch (v.getId()) {
             case R.id.application_item:
-                // 进入申请与通知页面
-                startActivity(new Intent(getActivity(), NewFriendsMsgActivity.class));
+                // 进入新朋友页面
+                MFGT.gotoNewFriend(mContext);
                 break;
             case R.id.group_item:
                 // 进入群聊列表页面
@@ -234,7 +241,7 @@ public class ContactListFragment extends EaseContactListFragment {
 	/**
 	 * delete contact
 	 * 
-	 * @param toDeleteUser
+	 * @param
 	 */
 	public void deleteContact(final EaseUser tobeDeleteUser) {
 		String st1 = getResources().getString(R.string.deleting);

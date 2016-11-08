@@ -73,7 +73,7 @@ public class RequestAddActivity extends AppCompatActivity {
             new EaseAlertDialog(this, R.string.not_add_myself).show();
             return;
         }
-        if (SuperWeChatHelper.getInstance().getContactList().containsKey(user.getMUserName())) {
+       /* if (SuperWeChatHelper.getInstance().getContactList().containsKey(user.getMUserName())) {
             //let the user know the contact already in your contact list
             if (EMClient.getInstance().contactManager().getBlackListUsernames().contains(user.getMUserName())) {
                 new EaseAlertDialog(this, R.string.user_already_in_contactlist).show();
@@ -81,14 +81,14 @@ public class RequestAddActivity extends AppCompatActivity {
             }
             new EaseAlertDialog(this, R.string.This_user_is_already_your_friend).show();
             return;
-        }
+        }*/
 
         progressDialog = new ProgressDialog(this);
         String stri = getResources().getString(R.string.Is_sending_a_request);
         progressDialog.setMessage(stri);
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
-        
+
         new Thread(new Runnable() {
             public void run() {
 

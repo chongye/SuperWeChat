@@ -71,4 +71,14 @@ public class NetDao {
                 .targetClass(String.class)
                 .execute(listener);
     }
+    //  添加好友
+    /*http://101.251.196.90:8000/SuperWeChatServerV2.0/addContact?m_contact_user_name=1&m_contact_cname=1*/
+    public static void addContact(Context context,String userName,String cuserName,OkHttpUtils.OnCompleteListener<String> listener){
+        OkHttpUtils<String> utils = new OkHttpUtils<>(context);
+        utils.setRequestUrl(I.REQUEST_ADD_CONTACT)
+                .addParam(I.Contact.USER_NAME,userName)
+                .addParam(I.Contact.CU_NAME,cuserName)
+                .targetClass(String.class)
+                .execute(listener);
+    }
 }

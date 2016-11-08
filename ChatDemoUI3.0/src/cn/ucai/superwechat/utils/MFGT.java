@@ -8,9 +8,11 @@ import com.hyphenate.easeui.domain.User;
 
 import cn.ucai.superwechat.R;
 import cn.ucai.superwechat.ui.AddContactActivity;
+import cn.ucai.superwechat.ui.ChatActivity;
 import cn.ucai.superwechat.ui.FriendProfileActivity;
 import cn.ucai.superwechat.ui.LoginActivity;
 import cn.ucai.superwechat.ui.MainActivity;
+import cn.ucai.superwechat.ui.NewFriendsMsgActivity;
 import cn.ucai.superwechat.ui.RegisterActivity;
 import cn.ucai.superwechat.ui.RequestAddActivity;
 import cn.ucai.superwechat.ui.SettingActivity;
@@ -50,7 +52,7 @@ public class MFGT {
         Intent intent = new Intent(context, SettingActivity.class);
         startActivity(context,intent);
     }
-    // 从个人中心跳转到用户资料
+    // 从个人中心跳转到用户详情
     public static void gotoUserProfile(Context context){
         Intent intent = new Intent(context, UserProfileActivity.class);
         startActivity(context,intent);
@@ -72,4 +74,16 @@ public class MFGT {
         intent.putExtra(I.User.USER_NAME,user);
         startActivity(context,intent);
     }
+    // ;跳转到新朋友界面
+    public static void gotoNewFriend(Context context){
+        Intent intent = new Intent(context, NewFriendsMsgActivity.class);
+        startActivity(context,intent);
+    }
+    //  跳转到聊天界面
+    public static void gotoChat(Context context,String username){
+        Intent intent = new Intent(context, ChatActivity.class);
+        intent.putExtra("userId",username);
+        startActivity(context,intent);
+    }
+
 }
