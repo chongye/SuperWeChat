@@ -64,6 +64,8 @@ import cn.ucai.superwechat.dialog.ActionItem;
 import cn.ucai.superwechat.dialog.TitlePopup;
 import cn.ucai.superwechat.runtimepermissions.PermissionsManager;
 import cn.ucai.superwechat.runtimepermissions.PermissionsResultAction;
+import cn.ucai.superwechat.utils.I;
+import cn.ucai.superwechat.utils.L;
 import cn.ucai.superwechat.utils.MFGT;
 import cn.ucai.superwechat.widget.DMTabHost;
 import cn.ucai.superwechat.widget.MFViewPager;
@@ -357,7 +359,7 @@ public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedCha
         intentFilter.addAction(Constant.ACTION_GROUP_CHANAGED);
 		intentFilter.addAction(RedPacketConstant.REFRESH_GROUP_RED_PACKET_ACTION);
         broadcastReceiver = new BroadcastReceiver() {*//*
-            
+
             @Override
             public void onReceive(Context context, Intent intent) {
                 updateUnreadLabel();
@@ -633,6 +635,11 @@ public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedCha
             showConflictDialog();
         } else if (intent.getBooleanExtra(Constant.ACCOUNT_REMOVED, false) && !isAccountRemovedDialogShow) {
             showAccountRemovedDialog();
+        }
+        boolean booleanExtra = intent.getBooleanExtra(I.BACK_ACTIVITY, false);
+        L.e(TAG,"booleanExtra="+booleanExtra);
+        if(booleanExtra){
+            layoutTabhost.setChecked(0);
         }
     }
 
