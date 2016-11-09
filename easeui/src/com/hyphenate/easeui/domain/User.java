@@ -1,6 +1,8 @@
 package com.hyphenate.easeui.domain;
 
 import com.baidu.platform.comapi.map.I;
+import com.hyphenate.easeui.utils.EaseCommonUtils;
+import com.hyphenate.easeui.utils.EaseUserUtils;
 
 import java.io.Serializable;
 
@@ -95,17 +97,6 @@ public class User implements Serializable {
 		return mavatarSuffix == null?".jpg":mavatarSuffix;
 	}
 
-	/*public String getInitialLetter() {
-		if(initialLetter == null){
-			UserUtils.setUserInitialLetter(this);
-		}
-		return initialLetter;
-	}
-
-	public void setInitialLetter(String initialLetter) {
-		this.initialLetter = initialLetter;
-	}
-*/
 	@Override
 	public String toString() {
 		return "UserAvatar [muserName=" + muserName + ", muserNick=" + muserNick + ", mavatarId=" + mavatarId
@@ -115,6 +106,13 @@ public class User implements Serializable {
 
 	public void setInitialLetter(String s) {
 		this.initialLetter = s;
+	}
+
+	public String getInitialLetter() {
+		if(initialLetter == null){
+			EaseCommonUtils.setAppUserInitialLetter(this);
+		}
+		return initialLetter;
 	}
 
 	public String getAvatar() {
