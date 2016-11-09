@@ -14,6 +14,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.ucai.superwechat.R;
+import cn.ucai.superwechat.SuperWeChatHelper;
 import cn.ucai.superwechat.runtimepermissions.PermissionsManager;
 import cn.ucai.superwechat.utils.I;
 
@@ -48,6 +49,8 @@ public class ChatActivity extends BaseActivity {
 
     private void initView() {
         imgBack.setVisibility(View.VISIBLE);
+        txtTitle.setVisibility(View.VISIBLE);
+        txtTitle.setText(SuperWeChatHelper.getInstance().getAppContactList().get(toChatUsername).getMUserNick());
     }
 
     @Override
