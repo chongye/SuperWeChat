@@ -7,6 +7,7 @@ import java.io.File;
 import cn.ucai.superwechat.bean.Result;
 import cn.ucai.superwechat.utils.I;
 import cn.ucai.superwechat.utils.MD5;
+import cn.ucai.superwechat.video.util.Utils;
 
 /**
  * Created by Administrator on 2016/11/1.
@@ -76,6 +77,16 @@ public class NetDao {
     public static void addContact(Context context,String userName,String cuserName,OkHttpUtils.OnCompleteListener<String> listener){
         OkHttpUtils<String> utils = new OkHttpUtils<>(context);
         utils.setRequestUrl(I.REQUEST_ADD_CONTACT)
+                .addParam(I.Contact.USER_NAME,userName)
+                .addParam(I.Contact.CU_NAME,cuserName)
+                .targetClass(String.class)
+                .execute(listener);
+    }
+    /*删除好友
+    * http://101.251.196.90:8000/SuperWeChatServerV2.0/deleteContact?m_contact_user_name=1&m_contact_cname=1*/
+    public static void deleteContact(Context context,String userName,String cuserName,OkHttpUtils.OnCompleteListener<String>listener){
+        OkHttpUtils<String> utils = new OkHttpUtils<>(context);
+        utils.setRequestUrl(I.REQUEST_DELETE_CONTACT)
                 .addParam(I.Contact.USER_NAME,userName)
                 .addParam(I.Contact.CU_NAME,cuserName)
                 .targetClass(String.class)
