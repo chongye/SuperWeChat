@@ -46,6 +46,7 @@ import com.hyphenate.chat.EMCmdMessageBody;
 import com.hyphenate.chat.EMConversation;
 import com.hyphenate.chat.EMConversation.EMConversationType;
 import com.hyphenate.chat.EMMessage;
+import com.hyphenate.easeui.utils.EaseCommonUtils;
 import com.hyphenate.util.EMLog;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.update.UmengUpdateAgent;
@@ -96,6 +97,9 @@ public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedCha
 
     Context mContext;
 
+    ContactListFragment contactListFragment;
+    ConversationListFragment conversationListFragment;
+
 
     /**
      * check if current user account was remove
@@ -133,7 +137,7 @@ public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedCha
 				.commit();*/
 
         //register broadcast receiver to receive the change of group from DemoHelper
-        /*registerBroadcastReceiver();*/
+        registerBroadcastReceiver();
 
 
         EMClient.getInstance().contactManager().setContactListener(new MyContactListener());
@@ -209,6 +213,8 @@ public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedCha
 		// select first tab
 		mTabs[0].setSelected(true);*/
         mContext = this;
+        contactListFragment = new ContactListFragment();
+        conversationListFragment = new ConversationListFragment();
         txtLeft.setVisibility(View.VISIBLE);
         imgRight.setVisibility(View.VISIBLE);
 
@@ -216,8 +222,8 @@ public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedCha
         layoutViewPager.setAdapter(mAdapter);
         layoutViewPager.setOffscreenPageLimit(4);
         mAdapter.clear();
-        mAdapter.addFragment(new ConversationListFragment(), getString(R.string.app_name));
-        mAdapter.addFragment(new ContactListFragment(), getString(R.string.contacts));
+        mAdapter.addFragment(conversationListFragment, getString(R.string.app_name));
+        mAdapter.addFragment(contactListFragment, getString(R.string.contacts));
         mAdapter.addFragment(new DicoverFragment(), getString(R.string.discover));
         mAdapter.addFragment(new ProfileFragment(), getString(R.string.me));
         mAdapter.notifyDataSetChanged();
@@ -352,28 +358,28 @@ public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedCha
         titlePopup.show(findViewById(R.id.layout_title));
     }
 	
-	/*private void registerBroadcastReceiver() {
-        *//*broadcastManager = LocalBroadcastManager.getInstance(this);
+	private void registerBroadcastReceiver() {
+        broadcastManager = LocalBroadcastManager.getInstance(this);
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(Constant.ACTION_CONTACT_CHANAGED);
         intentFilter.addAction(Constant.ACTION_GROUP_CHANAGED);
 		intentFilter.addAction(RedPacketConstant.REFRESH_GROUP_RED_PACKET_ACTION);
-        broadcastReceiver = new BroadcastReceiver() {*//*
+        broadcastReceiver = new BroadcastReceiver() {
 
             @Override
             public void onReceive(Context context, Intent intent) {
                 updateUnreadLabel();
                 updateUnreadAddressLable();
-                *//*if (currentTabIndex == 0) {
+                /*if (currentTabIndex == 0) {*/
                     // refresh conversation list
                     if (conversationListFragment != null) {
                         conversationListFragment.refresh();
                     }
-                } else if (currentTabIndex == 1) {
+//                } else if (currentTabIndex == 1) {
                     if(contactListFragment != null) {
                         contactListFragment.refresh();
                     }
-                }
+//                }
                 String action = intent.getAction();
                 if(action.equals(Constant.ACTION_GROUP_CHANAGED)){
                     if (EaseCommonUtils.getTopActivity(MainActivity.this).equals(GroupsActivity.class.getName())) {
@@ -387,10 +393,10 @@ public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedCha
 					}
 				}
 				//end of red packet code
-		*//*	}*//**//*
+			}
         };
-        broadcastManager.registerReceiver(broadcastReceiver, intentFilter);*//*
-    }*/
+        broadcastManager.registerReceiver(broadcastReceiver, intentFilter);
+    }
 
     public class MyContactListener implements EMContactListener {
         @Override
@@ -509,6 +515,8 @@ public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedCha
     protected void onResume() {
         super.onResume();
 
+        /*conversationListFragment.refresh();*/
+
         if (!isConflict && !isCurrentAccountRemoved) {
             updateUnreadLabel();
             updateUnreadAddressLable();
@@ -552,7 +560,6 @@ public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedCha
     private boolean isConflictDialogShow;
     private boolean isAccountRemovedDialogShow;
     private BroadcastReceiver internalDebugReceiver;
-    private ConversationListFragment conversationListFragment;
     private BroadcastReceiver broadcastReceiver;
     private LocalBroadcastManager broadcastManager;
 

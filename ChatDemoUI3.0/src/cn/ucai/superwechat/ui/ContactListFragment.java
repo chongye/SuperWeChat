@@ -36,6 +36,7 @@ import com.hyphenate.util.NetUtils;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.view.ContextMenu;
@@ -286,7 +287,6 @@ public class ContactListFragment extends EaseContactListFragment {
 							pd.dismiss();
 							contactList.remove(tobeDeleteUser);
 							contactListLayout.refresh();
-
 						}
 					});
 				} catch (final Exception e) {

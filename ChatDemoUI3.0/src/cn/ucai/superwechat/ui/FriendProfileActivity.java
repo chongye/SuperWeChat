@@ -66,7 +66,7 @@ public class FriendProfileActivity extends AppCompatActivity {
         if(SuperWeChatHelper.getInstance().getAppContactList().containsKey(user.getMUserName())){
             btSendMsg.setVisibility(View.VISIBLE);
             btVideoChat.setVisibility(View.VISIBLE);
-            EaseUserUtils.setCurrentAppUserNick(tvNick);
+            EaseUserUtils.setAppUserNick(user.getMUserName(),tvNick);
             EaseUserUtils.setAppUserAvatar(mComtext,user.getMUserName(),ivAvatar);
             tvUsername.setText(user.getMUserName());
         }else{
