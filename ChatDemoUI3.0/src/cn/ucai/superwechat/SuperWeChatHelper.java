@@ -1099,8 +1099,36 @@ public class SuperWeChatHelper {
        if(isSyncingContactsWithServer){
            return;
        }
-       
+
        isSyncingContactsWithServer = true;
+       NetDao.downloadContactAllList(appContext, EMClient.getInstance().getCurrentUser(), new OkHttpUtils.OnCompleteListener<String>() {
+           @Override
+           public void onSuccess(String s) {
+               if(s!=null){
+                   Result result = ResultUtils.getListResultFromJson(s,User.class);
+                   if(result!=null&&result.isRetMsg()){
+                       List<User> list = (List<User>) result.getRetData();
+                       if(list!=null && list.size()>0){
+                           Map<String,User> userMap = new HashMap<String, User>();
+                           UserDao dao = new UserDao(appContext);
+                           for(User u:list){
+                               EaseCommonUtils.setAppUserInitialLetter(u);
+                               userMap.put(u.getMUserName(),u);
+                               dao.saveAppContact(u);
+                           }
+                           getAppContactList().clear();
+                           getAppContactList().putAll(userMap);
+
+                       }
+                   }
+               }
+           }
+
+           @Override
+           public void onError(String error) {
+
+           }
+       });
        
        new Thread(){
            @Override
@@ -1115,7 +1143,6 @@ public class SuperWeChatHelper {
                        notifyContactsSyncListener(false);
                        return;
                    }
-                  
                    Map<String, EaseUser> userlist = new HashMap<String, EaseUser>();
                    for (String username : usernames) {
                        EaseUser user = new EaseUser(username);
@@ -1129,6 +1156,8 @@ public class SuperWeChatHelper {
                    UserDao dao = new UserDao(appContext);
                    List<EaseUser> users = new ArrayList<EaseUser>(userlist.values());
                    dao.saveContactList(users);
+
+                   broadcastManager.sendBroadcast(new Intent(Constant.ACTION_CONTACT_CHANAGED));
 
                    demoModel.setContactSynced(true);
                    EMLog.d(TAG, "set contact syn status to true");

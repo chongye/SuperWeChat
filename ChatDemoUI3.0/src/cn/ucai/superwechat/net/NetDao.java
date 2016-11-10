@@ -92,4 +92,13 @@ public class NetDao {
                 .targetClass(String.class)
                 .execute(listener);
     }
+    /*下载全部好友
+    * http://101.251.196.90:8000/SuperWeChatServerV2.0/downloadContactAllList?m_contact_user_name=yechong*/
+    public static void downloadContactAllList(Context context,String userName,OkHttpUtils.OnCompleteListener<String> listener){
+        OkHttpUtils<String> utils = new OkHttpUtils<>(context);
+        utils.setRequestUrl(I.REQUEST_DOWNLOAD_CONTACT_ALL_LIST)
+                .addParam(I.Contact.USER_NAME,userName)
+                .targetClass(String.class)
+                .execute(listener);
+    }
 }
