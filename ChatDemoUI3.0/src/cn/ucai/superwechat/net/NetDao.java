@@ -2,6 +2,8 @@ package cn.ucai.superwechat.net;
 
 import android.content.Context;
 
+import com.hyphenate.chat.EMGroup;
+
 import java.io.File;
 
 import cn.ucai.superwechat.bean.Result;
@@ -98,6 +100,35 @@ public class NetDao {
         OkHttpUtils<String> utils = new OkHttpUtils<>(context);
         utils.setRequestUrl(I.REQUEST_DOWNLOAD_CONTACT_ALL_LIST)
                 .addParam(I.Contact.USER_NAME,userName)
+                .targetClass(String.class)
+                .execute(listener);
+    }
+    /*创建群组
+    http://101.251.196.90:8000/SuperWeChatServerV2.0/createGroup?m_group_hxid=1&m_group_name=2&m_group_description=1&m_group_owner=1&m_group_is_public=true&m_group_allow_invites=true*/
+    public static void createGroup(Context context, EMGroup emGroup,OkHttpUtils.OnCompleteListener<String> listener){
+        OkHttpUtils<String> utils = new OkHttpUtils<>(context);
+        utils.setRequestUrl(I.REQUEST_CREATE_GROUP)
+                .addParam("m_group_hxid",emGroup.getGroupId())
+                .addParam("m_group_name",emGroup.getGroupName())
+                .addParam("m_group_description",emGroup.getDescription())
+                .addParam("m_group_owner",emGroup.getOwner())
+                .addParam("m_group_is_public",String.valueOf(emGroup.isPublic()))
+                .addParam("m_group_allow_invites",String.valueOf(emGroup.isAllowInvites()))
+                .post()
+                .targetClass(String.class)
+                .execute(listener);
+    }
+    public static void createGroup(Context context,EMGroup emGroup,File file,OkHttpUtils.OnCompleteListener<String> listener){
+        OkHttpUtils<String> utils = new OkHttpUtils<>(context);
+        utils.setRequestUrl(I.REQUEST_CREATE_GROUP)
+                .addParam("m_group_hxid",emGroup.getGroupId())
+                .addParam("m_group_name",emGroup.getGroupName())
+                .addParam("m_group_description",emGroup.getDescription())
+                .addParam("m_group_owner",emGroup.getOwner())
+                .addParam("m_group_is_public",String.valueOf(emGroup.isPublic()))
+                .addParam("m_group_allow_invites",String.valueOf(emGroup.isAllowInvites()))
+                .addFile2(file)
+                .post()
                 .targetClass(String.class)
                 .execute(listener);
     }
