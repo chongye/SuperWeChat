@@ -17,6 +17,7 @@ import java.util.List;
 
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.easeui.domain.User;
+import com.hyphenate.easeui.utils.EaseCommonUtils;
 import com.hyphenate.easeui.utils.EaseUserUtils;
 
 import cn.ucai.superwechat.R;
@@ -48,9 +49,11 @@ public class NewFriendsMsgAdapter extends ArrayAdapter<InviteMessage> {
 
 	private Context context;
 	private InviteMessgeDao messgeDao;
+	Context mContext;
 
 	public NewFriendsMsgAdapter(Context context, int textViewResourceId, List<InviteMessage> objects) {
 		super(context, textViewResourceId, objects);
+		mContext = context;
 		this.context = context;
 		// 得到消息请求的集合
 		messgeDao = new InviteMessgeDao(context);
@@ -97,6 +100,7 @@ public class NewFriendsMsgAdapter extends ArrayAdapter<InviteMessage> {
 			if(msg.getGroupId() != null){ // show group name
 				holder.groupContainer.setVisibility(View.VISIBLE);
 				holder.groupname.setText(msg.getGroupName());
+				EaseUserUtils.setGroupAvatar(context,msg.getGroupId(),holder.avator);
 			} else{
 				holder.groupContainer.setVisibility(View.GONE);
 			}
