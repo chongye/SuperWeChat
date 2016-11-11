@@ -56,6 +56,7 @@ public interface I {
     String SEND_BROADCAST_UPDATE_CART = "cn.ucai.fulishop.update.cart";
     String BACK_ACTIVITY = "back activity";
     String REQUEST_CREATE_GROUP = "createGroup";
+    String REQUEST_ADD_GROUP_MENBER = "addGroupMember";
 
     interface Goods {
         String KEY_RESULT = "result";

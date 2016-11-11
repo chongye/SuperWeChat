@@ -2,12 +2,16 @@ package cn.ucai.superwechat.net;
 
 import android.content.Context;
 
+import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMGroup;
+import com.hyphenate.easeui.domain.Group;
+import com.hyphenate.easeui.domain.User;
 
 import java.io.File;
 
 import cn.ucai.superwechat.bean.Result;
 import cn.ucai.superwechat.utils.I;
+import cn.ucai.superwechat.utils.L;
 import cn.ucai.superwechat.utils.MD5;
 import cn.ucai.superwechat.video.util.Utils;
 
@@ -129,6 +133,24 @@ public class NetDao {
                 .addParam("m_group_allow_invites",String.valueOf(emGroup.isAllowInvites()))
                 .addFile2(file)
                 .post()
+                .targetClass(String.class)
+                .execute(listener);
+    }
+    /*添加群成员
+    * http://101.251.196.90:8000/SuperWeChatServerV2.0/addGroupMember?m_member_user_name=1&m_member_group_hxid=1*/
+    public static void addGroupMember(Context context,EMGroup emGroup,OkHttpUtils.OnCompleteListener<String>listener){
+        String member = null;
+        for(String m : emGroup.getMembers()){
+            if(!m.equals(EMClient.getInstance().getCurrentUser())){
+                member += m + ",";
+            }
+        }
+        member = member.substring(0,member.lastIndexOf(","));
+        L.e("groupMember","group"+member.toString());
+        OkHttpUtils<String> utils = new OkHttpUtils<>(context);
+        utils.setRequestUrl(I.REQUEST_ADD_GROUP_MENBER)
+                .addParam("m_member_user_name",member)
+                .addParam("m_member_group_hxid",String.valueOf(emGroup.getGroupId()))
                 .targetClass(String.class)
                 .execute(listener);
     }

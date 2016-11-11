@@ -50,7 +50,6 @@ public class ChatActivity extends BaseActivity {
     private void initView() {
         imgBack.setVisibility(View.VISIBLE);
         txtTitle.setVisibility(View.VISIBLE);
-        txtTitle.setText(SuperWeChatHelper.getInstance().getAppContactList().get(toChatUsername).getMUserNick());
     }
 
     @Override
