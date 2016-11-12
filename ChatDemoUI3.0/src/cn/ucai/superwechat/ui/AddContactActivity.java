@@ -186,7 +186,7 @@ public class AddContactActivity extends BaseActivity {
                     Result result = ResultUtils.getResultFromJson(s, User.class);
                     if(result!=null&&result.isRetMsg()){
                         User u = (User) result.getRetData();
-                        MFGT.gotoFriendProfile(mContext,u);
+                        MFGT.gotoFriendProfile(mContext,u.getMUserName());
                         progressDialog.dismiss();
                     }else {
                         CommonUtils.showShortToast(R.string.search_contact_fail);

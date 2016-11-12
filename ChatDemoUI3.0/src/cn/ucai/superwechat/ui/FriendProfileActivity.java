@@ -2,6 +2,7 @@ package cn.ucai.superwechat.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.BoolRes;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -18,9 +19,13 @@ import butterknife.OnClick;
 import cn.ucai.superwechat.R;
 import cn.ucai.superwechat.SuperWeChatApplication;
 import cn.ucai.superwechat.SuperWeChatHelper;
+import cn.ucai.superwechat.bean.Result;
+import cn.ucai.superwechat.net.NetDao;
+import cn.ucai.superwechat.net.OkHttpUtils;
 import cn.ucai.superwechat.utils.I;
 import cn.ucai.superwechat.utils.L;
 import cn.ucai.superwechat.utils.MFGT;
+import cn.ucai.superwechat.utils.ResultUtils;
 
 public class FriendProfileActivity extends AppCompatActivity {
     final String TAG = FriendProfileActivity.class.getSimpleName();
@@ -44,18 +49,55 @@ public class FriendProfileActivity extends AppCompatActivity {
 
     User user;
     FriendProfileActivity mComtext;
+    String userName;
+    boolean isFriend;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friend_profile);
-        user = (User) getIntent().getSerializableExtra(I.User.USER_NAME);
-        L.e(TAG,user.toString());
-        if(user == null){
+        userName = getIntent().getStringExtra(I.User.USER_NAME);
+        if(userName == null){
             MFGT.finish(this);
         }
         ButterKnife.bind(this);
         initView();
+        if(SuperWeChatHelper.getInstance().getAppContactList().get(userName) == null){
+            isFriend = false;
+        }else {
+            isFriend = true;
+        }
+        isFriend(isFriend);
+        syncUserInfo();
+    }
+
+    private void syncUserInfo() {
+        //  getAppContactList 键为userName  传过来的好友信息，在ContactList里存在键，则为好友
+        NetDao.findUserByUserName(mComtext, userName, new OkHttpUtils.OnCompleteListener<String>() {
+            @Override
+            public void onSuccess(String s) {
+                if(s!=null){
+                    Result result = ResultUtils.getResultFromJson(s,User.class);
+                    if(result!=null&&result.isRetMsg()){
+                        User u = (User) result.getRetData();
+                        if(u!=null){
+                            L.e(TAG,"user:"+u.toString());
+                            if(isFriend){
+                                SuperWeChatHelper.getInstance().delAppContact(u.getMUserName());
+                                SuperWeChatHelper.getInstance().saveAppContact(u);
+                            }
+                            user = u;
+                            setUserInfo();
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onError(String error) {
+
+            }
+        });
     }
 
     private void initView() {
@@ -63,21 +105,20 @@ public class FriendProfileActivity extends AppCompatActivity {
         imgBack.setVisibility(View.VISIBLE);
         txtTitle.setVisibility(View.VISIBLE);
         txtTitle.setText(R.string.contact_detial_profile);
-        //  getAppContactList 键为userName  传过来的好友信息，在ContactList里存在键，则为好友
-        if(SuperWeChatHelper.getInstance().getAppContactList().containsKey(user.getMUserName())){
+    }
+    public void isFriend(Boolean isFriend){
+        if(isFriend){
             btSendMsg.setVisibility(View.VISIBLE);
             btVideoChat.setVisibility(View.VISIBLE);
-            EaseUserUtils.setAppUserNick(user.getMUserName(),tvNick);
-            EaseUserUtils.setAppUserAvatar(mComtext,user.getMUserName(),ivAvatar);
-            tvUsername.setText(user.getMUserName());
         }else{
             btAddContact.setVisibility(View.VISIBLE);
-            EaseUserUtils.setAppContactAvatar(mComtext,user,ivAvatar);
-            tvNick.setText(user.getMUserNick());
-            tvUsername.setText(user.getMUserName());
         }
     }
-
+    public void setUserInfo(){
+        EaseUserUtils.setAppUserNick(user.getMUserName(),tvNick);
+        EaseUserUtils.setAppContactAvatar(mComtext,user,ivAvatar);
+        tvUsername.setText(user.getMUserName());
+    }
     @OnClick({R.id.img_back, R.id.bt_AddContact, R.id.bt_sendMsg, R.id.bt_videoChat})
     public void onClick(View view) {
         switch (view.getId()) {

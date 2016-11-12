@@ -99,6 +99,9 @@ public class EaseUserUtils {
     public static void setAppUserAvatar(Context context, String username, ImageView imageView){
         User user = getAppUserInfo(username);
         Log.e("user","user"+user);
+        if(user==null){
+            user = new User(username);
+        }
         if(user != null && user.getAvatar() != null){
             try {
                 String avatarResId = user.getAvatar();
@@ -135,10 +138,10 @@ public class EaseUserUtils {
                 Glide.with(context).load(avatarResId).into(imageView);
             } catch (Exception e) {
                 //use default avatar
-                Glide.with(context).load(Group.getAvatar(hxid)).diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(R.drawable.ease_default_avatar).into(imageView);
+                Glide.with(context).load(Group.getAvatar(hxid)).diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(R.drawable.ease_group_icon).into(imageView);
             }
         }else{
-            Glide.with(context).load(R.drawable.ease_default_avatar).into(imageView);
+            Glide.with(context).load(R.drawable.ease_group_icon).into(imageView);
         }
     }
     

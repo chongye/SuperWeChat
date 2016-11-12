@@ -94,27 +94,27 @@ public class NewFriendsMsgAdapter extends ArrayAdapter<InviteMessage> {
 		
 		final InviteMessage msg = getItem(position);
 		if (msg != null) {
-		    
-		    holder.agree.setVisibility(View.INVISIBLE);
-		    
-			if(msg.getGroupId() != null){ // show group name
+
+			holder.agree.setVisibility(View.INVISIBLE);
+
+			if (msg.getGroupId() != null) { // show group name
 				holder.groupContainer.setVisibility(View.VISIBLE);
 				holder.groupname.setText(msg.getGroupName());
-				EaseUserUtils.setGroupAvatar(context,msg.getGroupId(),holder.avator);
-			} else{
+				EaseUserUtils.setGroupAvatar(context, msg.getGroupId(), holder.avator);
+			} else {
 				holder.groupContainer.setVisibility(View.GONE);
 			}
-			
+
 			holder.reason.setText(msg.getReason());
 			holder.name.setText(msg.getFrom());
 			NetDao.findUserByUserName(context, msg.getFrom(), new OkHttpUtils.OnCompleteListener<String>() {
 				@Override
 				public void onSuccess(String s) {
-					if(s != null){
+					if (s != null) {
 						Result result = ResultUtils.getResultFromJson(s, User.class);
-						if(result!=null&&result.isRetMsg()){
+						if (result != null && result.isRetMsg()) {
 							User u = (User) result.getRetData();
-							EaseUserUtils.setAppContactAvatar(context,u,holder.avator);
+							EaseUserUtils.setAppContactAvatar(context, u, holder.avator);
 						}
 					}
 				}
@@ -124,6 +124,7 @@ public class NewFriendsMsgAdapter extends ArrayAdapter<InviteMessage> {
 
 				}
 			});
+		}
 			// holder.time.setText(DateUtils.getTimestampString(new
 			// Date(msg.getTime())));
 			if (msg.getStatus() == InviteMesageStatus.BEAGREED) {
@@ -173,16 +174,16 @@ public class NewFriendsMsgAdapter extends ArrayAdapter<InviteMessage> {
 				holder.status.setText(str5);
 				holder.status.setBackgroundDrawable(null);
 				holder.status.setEnabled(false);
-			} *//*else if(msg.getStatus() == InviteMesageStatus.REFUSED){
+			} else if(msg.getStatus() == InviteMesageStatus.REFUSED){
 				holder.status.setText(str6);
 				holder.status.setBackgroundDrawable(null);
-				holder.status.setEnabled(false);*/
-			}/* else if(msg.getStatus() == InviteMesageStatus.GROUPINVITATION_ACCEPTED){
+				holder.status.setEnabled(false);
+			} else if(msg.getStatus() == InviteMesageStatus.GROUPINVITATION_ACCEPTED){
 			    String str = msg.getGroupInviter() + str9 + msg.getGroupName();
                 holder.status.setText(str);
                 holder.status.setBackgroundDrawable(null);
                 holder.status.setEnabled(false);
-            } *//*else if(msg.getStatus() == InviteMesageStatus.GROUPINVITATION_DECLINED){
+            } else if(msg.getStatus() == InviteMesageStatus.GROUPINVITATION_DECLINED){
                 String str = msg.getGroupInviter() + str10 + msg.getGroupName();
                 holder.status.setText(str);
                 holder.status.setBackgroundDrawable(null);
@@ -310,7 +311,7 @@ public class NewFriendsMsgAdapter extends ArrayAdapter<InviteMessage> {
 		TextView name;
 		TextView reason;
         Button agree;
-		/*Button status;*/
+		Button status;
 		LinearLayout groupContainer;
 		TextView groupname;
 		// TextView time;

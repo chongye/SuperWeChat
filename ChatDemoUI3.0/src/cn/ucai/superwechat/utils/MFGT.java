@@ -63,9 +63,9 @@ public class MFGT {
         startActivity(context,intent);
     }
     //在查找成功，跳到好友信息界面
-    public static void gotoFriendProfile(Context context,User user){
+    public static void gotoFriendProfile(Context context,String username){
         Intent intent = new Intent(context, FriendProfileActivity.class);
-        intent.putExtra(I.User.USER_NAME,user);
+        intent.putExtra(I.User.USER_NAME,username);
         startActivity(context,intent);
     }
     //跳转到请求添加好友界面

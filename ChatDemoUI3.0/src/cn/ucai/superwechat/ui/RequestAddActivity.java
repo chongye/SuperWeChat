@@ -43,7 +43,7 @@ public class RequestAddActivity extends AppCompatActivity {
         setContentView(R.layout.activity_request_add);
         ButterKnife.bind(this);
         user = (User) getIntent().getSerializableExtra(I.User.USER_NAME);
-        if(user==null){
+        if (user == null) {
             finish();
         }
         initView();
@@ -54,6 +54,7 @@ public class RequestAddActivity extends AppCompatActivity {
         imgBack.setVisibility(View.VISIBLE);
         txtTitle.setText(R.string.add_friend);
         btnSend.setVisibility(View.VISIBLE);
+        etRequsetMsg.setText("我是"+SuperWeChatHelper.getInstance().getAppContactList().get(EMClient.getInstance().getCurrentUser()).getMUserNick());
     }
 
     @OnClick({R.id.img_back, R.id.btn_send})
@@ -94,7 +95,7 @@ public class RequestAddActivity extends AppCompatActivity {
 
                 try {
                     //demo use a hardcode reason here, you need let user to input if you like
-                    String s = "我是"+SuperWeChatHelper.getInstance().getAppContactList().get(EMClient.getInstance().getCurrentUser()).getMUserNick();
+                    String s = "我是" + SuperWeChatHelper.getInstance().getAppContactList().get(EMClient.getInstance().getCurrentUser()).getMUserNick();
                     EMClient.getInstance().contactManager().addContact(user.getMUserName(), s);
                     runOnUiThread(new Runnable() {
                         public void run() {
