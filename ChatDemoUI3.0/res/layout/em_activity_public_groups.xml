@@ -2,8 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/common_bg"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -46,15 +47,18 @@
     </RelativeLayout>
 	
     <include android:id="@+id/search_bar_view" layout="@layout/em_search_bar_with_padding"/>
-    <ListView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/transparent"
+        android:orientation="vertical"
+        app:layoutManager="android.support.v7.widget.GridLayoutManager"
+        app:spanCount="2"/>
+        <!--android:background="@android:color/transparent"
         android:cacheColorHint="#00000000"
         android:divider="#D4D4D4"
         android:dividerHeight="1px"
-        android:fastScrollAlwaysVisible="false"
-        android:fastScrollEnabled="false" />
+        &lt;!&ndash;android:fastScrollAlwaysVisible="false"
+        android:fastScrollEnabled="false"&ndash;&gt;-->
 
 </LinearLayout>
