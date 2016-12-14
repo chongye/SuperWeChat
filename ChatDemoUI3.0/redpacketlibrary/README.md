@@ -107,7 +107,7 @@ include ':EaseUI', ':redpacketlibrary'
 ```
 
 ###3.3 初始化红包上下文和token
-* DemoApplication中初始化红包上下文。
+* SuperWeChatApplication中初始化红包上下文。
 
 ```
     import com.easemob.redpacketsdk.RedPacket;

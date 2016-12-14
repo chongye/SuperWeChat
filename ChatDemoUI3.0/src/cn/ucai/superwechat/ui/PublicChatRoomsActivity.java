@@ -50,6 +50,9 @@ import com.hyphenate.chat.EMCursorResult;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.ucai.superwechat.R;
+import cn.ucai.superwechat.live.data.model.LiveRoom;
+import cn.ucai.superwechat.live.ui.activity.LiveDetailsActivity;
+import cn.ucai.superwechat.live.ui.activity.StartLiveActivity;
 import cn.ucai.superwechat.widget.GridMarginDecoration;
 
 import com.hyphenate.easeui.utils.EaseUserUtils;
@@ -63,7 +66,8 @@ public class PublicChatRoomsActivity extends BaseActivity {
 	private RecyclerView listView;
 	private LiveAdapter adapter;
 	
-	private List<EMChatRoom> chatRoomList;
+	private List<LiveRoom> chatRoomList;
+	private List<LiveRoom> liveRooms;
 	private boolean isLoading;
 	private boolean isFirstLoading = true;
 	private boolean hasMoreData = true;
@@ -74,7 +78,7 @@ public class PublicChatRoomsActivity extends BaseActivity {
     private TextView footLoadingText;
     private EditText etSearch;
     private ImageButton ibClean;
-    private List<EMChatRoom> mRooms;
+    //private List<EMChatRoom> mRooms;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -91,8 +95,8 @@ public class PublicChatRoomsActivity extends BaseActivity {
 		listView.addItemDecoration(new GridMarginDecoration(6));
 		TextView title = (TextView) findViewById(R.id.tv_title);
 		title.setText(getResources().getString(R.string.chat_room));
-		chatRoomList = new ArrayList<EMChatRoom>();
-		mRooms = new ArrayList<EMChatRoom>();
+		chatRoomList = new ArrayList<LiveRoom>();
+		//mRooms = new ArrayList<EMChatRoom>();
 		
 		View footView = getLayoutInflater().inflate(R.layout.em_listview_footer_view, listView, false);
         footLoadingLayout = (LinearLayout) footView.findViewById(R.id.loading_layout);
@@ -215,7 +219,7 @@ public class PublicChatRoomsActivity extends BaseActivity {
                     runOnUiThread(new Runnable() {
 
                         public void run() {
-                            chatRoomList.addAll(chatRooms);
+                            chatRoomList.addAll(getLiveRooms(chatRooms));
                             if(chatRooms.size() != 0){
                                 cursor = result.getCursor();
                             }
@@ -224,7 +228,7 @@ public class PublicChatRoomsActivity extends BaseActivity {
                                 isFirstLoading = false;
                                 adapter = new LiveAdapter(PublicChatRoomsActivity.this, chatRoomList);
                                 listView.setAdapter(adapter);
-								mRooms.addAll(chatRooms);
+								//mRooms.addAll(chatRooms);
                             }else{
                                 if(chatRooms.size() < pagesize){
                                     hasMoreData = false;
@@ -254,6 +258,19 @@ public class PublicChatRoomsActivity extends BaseActivity {
 
 	public void search(View view) {
 	}
+	public static List<LiveRoom> getLiveRooms(List<EMChatRoom> list){
+		List<LiveRoom> roomList = new ArrayList<>();
+		for(EMChatRoom room:list){
+			LiveRoom liveRoom = new LiveRoom();
+			liveRoom.setName(room.getName());
+			liveRoom.setId(room.getId());
+			liveRoom.setAudienceNum(room.getAffiliationsCount());
+			liveRoom.setCover(room.getId());
+			liveRoom.setAnchorId(room.getOwner());
+			roomList.add(liveRoom);
+		}
+		return roomList;
+	}
 
 	/**
 	 * adapter
@@ -261,10 +278,10 @@ public class PublicChatRoomsActivity extends BaseActivity {
 	 */
 	private class LiveAdapter extends RecyclerView.Adapter<PhotoViewHolder> {
 		private RoomFilter filter;
-		List<EMChatRoom> rooms;
+		List<LiveRoom> rooms;
 		private Context context;
 
-		public LiveAdapter(Context context, List<EMChatRoom> rooms) {
+		public LiveAdapter(Context context, List<LiveRoom> rooms) {
 			this.rooms = rooms;
 			this.context = context;
 		}
@@ -277,17 +294,25 @@ public class PublicChatRoomsActivity extends BaseActivity {
 		}
 		@Override
 		public PhotoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-			PhotoViewHolder holder = new PhotoViewHolder(LayoutInflater.from(context).
+			final PhotoViewHolder holder = new PhotoViewHolder(LayoutInflater.from(context).
 					inflate(R.layout.layout_livelist_item, parent, false));
 
-			/*holder.itemView.setOnClickListener(new View.OnClickListener() {
+			holder.itemView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					final int position = holder.getAdapterPosition();
+					/*final int position = holder.getAdapterPosition();
 					if (position == android.support.v7.widget.RecyclerView.NO_POSITION) return;
-					context.startActivity(new Intent(context, ChatRoomDetailsActivity.class));
+					context.startActivity(new Intent(context, StartLiveActivity.class));*/
+					int position = holder.getAdapterPosition();
+					Log.i("main",EMClient.getInstance().getCurrentUser()+","+rooms.get(position).getAnchorId()+rooms.get(position).getChatroomId());
+					if(EMClient.getInstance().getCurrentUser().equals(rooms.get(position).getAnchorId())){
+
+						context.startActivity(new Intent(context,StartLiveActivity.class).putExtra("liveroom",rooms.get(position)));
+					}else {
+						context.startActivity(new Intent(context, LiveDetailsActivity.class).putExtra("liveroom",rooms.get(position)));
+					}
 				}
-			});*/
+			});
 			return holder;
 		}
 
@@ -295,7 +320,7 @@ public class PublicChatRoomsActivity extends BaseActivity {
 		public void onBindViewHolder(PhotoViewHolder holder, int position) {
 			EaseUserUtils.setLiveAvatar(context,rooms.get(position).getId(),holder.imageView);
 			holder.anchor.setText(rooms.get(position).getName());
-			holder.audienceNum.setText(rooms.get(position).getAffiliationsCount()+"人");
+			holder.audienceNum.setText(rooms.get(position).getAudienceNum()+"人");
 		}
 
 		@Override
@@ -313,8 +338,8 @@ public class PublicChatRoomsActivity extends BaseActivity {
 					results.values = rooms;
 					results.count = rooms.size();
 				}else{
-					List<EMChatRoom> roomss = new ArrayList<EMChatRoom>();
-					for(EMChatRoom chatRoom : rooms){
+					List<LiveRoom> roomss = new ArrayList<LiveRoom>();
+					for(LiveRoom chatRoom : rooms){
 						if(chatRoom.getName().contains(constraint)){
 							roomss.add(chatRoom);
 						}
@@ -329,7 +354,7 @@ public class PublicChatRoomsActivity extends BaseActivity {
 			@Override
 			protected void publishResults(CharSequence constraint, FilterResults results) {
 				chatRoomList.clear();
-				chatRoomList.addAll((List<EMChatRoom>)results.values);
+				chatRoomList.addAll((List<LiveRoom>)results.values);
 				notifyDataSetChanged();
 			}
 			

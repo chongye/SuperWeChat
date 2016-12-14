@@ -68,6 +68,7 @@ dependencies {
     compile project(':redpacketlibrary')
     compile project(':EaseUI')
     compile fileTree(include: '*.jar', exclude: 'android-support-multidex.jar', dir: 'libs')
+    compile project(':ulive-android-sdk')
     //考虑到在eclipse中,直接使用源码
     //    compile ('com.anthonycr.grant:permissions:1.0'){
     //        exclude module: 'support-v4'
@@ -81,4 +82,6 @@ dependencies {
     compile 'com.android.support:support-v4:23.4.0'
     compile 'com.android.support:recyclerview-v7:23.4.0'
     apt 'com.jakewharton:butterknife-compiler:8.4.0'
+    compile 'com.android.support:design:23.4.0'
+    compile 'com.github.florent37:viewanimator:1.0.4'
 }

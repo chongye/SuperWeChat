@@ -157,6 +157,20 @@ public class EaseUserUtils {
             Glide.with(context).load(R.drawable.ease_group_icon).into(imageView);
         }
     }
+
+    public static void setCoverAvatar(Context context, String liveId,ImageView imageView) {
+        if(liveId != null ){
+            try {
+                String avatarResId = getAvatar(liveId);
+                Glide.with(context).load(avatarResId).into(imageView);
+            } catch (Exception e) {
+                //use default avatar
+                Glide.with(context).load(getAvatar(liveId)).diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(R.drawable.ease_group_icon).into(imageView);
+            }
+        }else{
+            Glide.with(context).load(R.drawable.ease_group_icon).into(imageView);
+        }
+    }
     public static String getAvatar(String hxid){
         return "http://101.251.196.90:8000/SuperWeChatServerV2.0/downloadAvatar?name_or_hxid="+hxid+"&avatarType=chatroom_icon&m_avatar_suffix=.jpg";
     }

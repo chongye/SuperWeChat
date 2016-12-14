@@ -60,7 +60,7 @@
             android:theme="@style/horizontal_slide"
             android:windowSoftInputMode="adjustPan" />
 
-        <!-- 开屏页 -->
+        <!-- 闪屏页 -->
         <activity
             android:name=".ui.SplashActivity"
             android:screenOrientation="portrait"
@@ -475,6 +475,20 @@
         <activity android:name=".ui.SettingActivity" />
         <activity android:name=".ui.FriendProfileActivity" />
         <activity android:name=".ui.RequestAddActivity"></activity>
+        <activity android:name=".live.ui.activity.StartLiveActivity"/>
+        <activity android:name=".live.ui.activity.LiveDetailsActivity"/>
+        <!--<activity
+            android:name=".ui.activity.LiveDetailsActivity"
+            android:parentActivityName=".ui.activity.MainActivity"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+        <activity
+            android:name=".ui.activity.StartLiveActivity"
+            android:parentActivityName=".ui.activity.MainActivity"
+            android:screenOrientation="portrait">
+        </activity>-->
     </application>
+
 
 </manifest>
